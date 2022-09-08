@@ -47,7 +47,7 @@ const SignUpPage = () => {
 
   return (
     <Formik
-      initialValues={{ name: "", email: "", password: "" }}
+      initialValues={{ name: "", email: "", password: "", term: false }}
       validationSchema={Yup.object({
         name: Yup.string().required("This field is required!"),
         email: Yup.string()
@@ -56,6 +56,7 @@ const SignUpPage = () => {
         password: Yup.string()
           .required("This field is required!")
           .min(8, "Password must at least 8 char"),
+        term: Yup.bool().oneOf([true], "Accept Terms is required!"),
       })}
       onSubmit={(values) => {
         console.log("Submit: ", values);
@@ -94,8 +95,12 @@ const SignUpPage = () => {
             <div className="flex items-start mb-5 gap-x-5">
               <Checkbox
                 name="term"
+                // onChange={(e) => console.log(e)}
                 checked={acceptTerm}
-                onClick={handleToggleTerm}
+                onClick={() => {
+                  setFieldValue("term", !acceptTerm);
+                  handleToggleTerm();
+                }}
               >
                 <p className="flex-1 text-xs lg:text-sm text-text2 dark:text-text3">
                   I agree to the{" "}
@@ -109,6 +114,10 @@ const SignUpPage = () => {
                 </p>
               </Checkbox>
             </div>
+            {touched.term && errors.term &&
+              <p className="pb-3 -mt-3 text-xs lg:text-sm text-error">
+            
+             {errors.term}</p>}
 
             <Button primary type="submit">
               Create my account

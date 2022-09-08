@@ -6,6 +6,7 @@ const Checkbox = ({
   onClick = () => {},
   children,
 }) => {
+  console.log(checked)
   return (
     <div className="flex items-start gap-x-5">
       <div
