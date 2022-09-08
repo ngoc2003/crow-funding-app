@@ -10,7 +10,7 @@ const Checkbox = ({
     <div className="flex items-start gap-x-5">
       <div
         className={`inline-flex items-center text-white justify-center w-5 h-5 border rounded cursor-pointer ${
-          checked ? "bg-primary border-primary" : "border-stroke"
+          checked ? "bg-primary border-primary" : "border-stroke dark:border-text3"
         }`}
         onClick={onClick}
       >
@@ -20,7 +20,7 @@ const Checkbox = ({
           className="hidden"
           onChange={() => {}}
         />
-        <span>
+        <span className={`${checked ? '':'opacity-0 invisible' }`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useController } from "react-hook-form";
 import PropTypes from "prop-types";
 
 const Input = (props) => {
@@ -17,11 +16,16 @@ const Input = (props) => {
       <input
         type={type}
         placeholder={error.length > 0 ? "" : placeholder}
-        className={`w-full py-4 px-6 border rounded-xl text-text1 font-medium text-sm placeholder:text-text4 ${
-          error.length > 0 ? "border-error" : "border-stroke"
-        } `}
+        className={`${
+          children && "pr-16"
+        } bg-transparent w-full py-4 dark:text-white px-6 border rounded-xl text-text1 font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4 ${
+          error.length > 0 ? "border-error" : "border-stroke dark:border-darkStroke"
+        }  `}
         {...rest}
       />
+      <span className="absolute right-6 top-2/4 -translate-y-2/4">
+        {children}
+      </span>
       {error.length > 0 && (
         <span className="absolute text-sm font-medium pointer-events-none error-input top-2/4 -translate-y-2/4 text-error left-6">
           {error}

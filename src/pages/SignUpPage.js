@@ -1,6 +1,5 @@
 import { set } from "lodash";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
 import Button from "../components/common/button/Button";
@@ -9,35 +8,43 @@ import FormGroup from "../components/common/FormGroup";
 import { Input } from "../components/common/input";
 import { Label } from "../components/common/label";
 import LayoutAuthen from "../layouts/LayoutAuthen";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-
-const infos = [
-  {
-    name: "name",
-    label: "Full name *",
-    placeholder: "John Doe",
-    type: "text",
-  },
-  {
-    name: "email",
-    label: "Email address *",
-    placeholder: "example@gmail.com",
-    type: "email",
-  },
-  {
-    name: "password",
-    label: "Password *",
-    placeholder: "Type your own password here",
-    type: "password",
-  },
-];
+import IconEyeToggle from "../components/common/icons";
+import useToggleValue from "../hooks/useToggleValue";
 
 const SignUpPage = () => {
-  const [acceptTerm, setAcceptTerm] = useState(false);
-  const handleToggleTerm = () => {
-    setAcceptTerm(!acceptTerm);
-  };
+  const { value: showPassword, handleToggleValue: handleTogglePassword } =
+    useToggleValue(false);
+  const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
+    useToggleValue(false);
+
+  const infos = [
+    {
+      name: "name",
+      label: "Full name *",
+      placeholder: "John Doe",
+      type: "text",
+    },
+    {
+      name: "email",
+      label: "Email address *",
+      placeholder: "example@gmail.com",
+      type: "email",
+    },
+    {
+      name: "password",
+      label: "Password *",
+      placeholder: "Type your own password here",
+      type: showPassword ? "text" : "password",
+      icon: (
+        <IconEyeToggle
+          toggle={showPassword}
+          onClick={handleTogglePassword}
+        ></IconEyeToggle>
+      ),
+    },
+  ];
+
   return (
     <Formik
       initialValues={{ name: "", email: "", password: "" }}
@@ -66,41 +73,31 @@ const SignUpPage = () => {
           <Form className="text-left">
             {infos.map((info) => {
               return (
-                <FormGroup>
+                <FormGroup key={info.name}>
                   <Label>{info.label}</Label>
                   <Input
                     name={info.name}
                     placeholder={info.placeholder}
-                    error={errors[info.name]}
+                    type={info.type}
+                    error={
+                      errors[info.name] && touched[info.name]
+                        ? errors[info.name]
+                        : ""
+                    }
                     onChange={(e) => setFieldValue(info.name, e.target.value)}
-                  />
+                  >
+                    {info.icon ? info.icon : ""}
+                  </Input>
                 </FormGroup>
               );
             })}
-            {/* <FormGroup>
-              <Label>Email *</Label>
-              <Field
-                placeholder="example@gmail.com"
-                // error={errors.email?.message}
-                name="email"
-              ></Field>
-            </FormGroup>
-            <FormGroup>
-              <Label>Password *</Label>
-              <Field
-                placeholder="Create a password"
-                // error={errors.password?.message}
-                name="password"
-                type="password"
-              ></Field>
-            </FormGroup> */}
             <div className="flex items-start mb-5 gap-x-5">
               <Checkbox
                 name="term"
                 checked={acceptTerm}
                 onClick={handleToggleTerm}
               >
-                <p className="flex-1 text-sm text-text2">
+                <p className="flex-1 text-xs lg:text-sm text-text2 dark:text-text3">
                   I agree to the{" "}
                   <span className="underline cursor-pointer text-secondary">
                     Terms os Use
