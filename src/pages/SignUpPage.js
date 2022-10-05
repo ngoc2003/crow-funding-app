@@ -119,7 +119,7 @@ const SignUpPage = () => {
             
              {errors.term}</p>}
 
-            <Button primary type="submit">
+            <Button fluid primary type="submit">
               Create my account
             </Button>
           </Form>

@@ -8,6 +8,7 @@ const Button = ({
   primary = false,
   secondary = false,
   isLoading = false,
+  fluid = false,
   ...rest
 }) => {
   const child = !!isLoading ? (
@@ -18,7 +19,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`py-3 text-base min-h-[56px] font-semibold rounded-xl flex items-center justify-center w-full text-white ${
+      className={`py-3 text-base min-h-[56px] font-semibold rounded-xl flex items-center justify-center ${fluid && 'w-full' } px-4 text-white ${
         primary ? "bg-primary" : secondary ? "bg-secondary" : ""
       } ${isLoading && "pointer-events-none opacity-50"} ${className}`}
       {...rest}
