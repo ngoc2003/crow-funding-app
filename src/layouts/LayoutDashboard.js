@@ -1,14 +1,15 @@
 import React from "react";
 import Sidebar from "../modules/dashboard/Sidebar";
 import Topbar from "../modules/dashboard/Topbar";
+import { Outlet } from "react-router-dom";
 
-const LayoutDashboard = ({ children }) => {
+const LayoutDashboard = () => {
   return (
-    <div className="p-10 bg-lite">
+    <div className="min-h-screen p-10 bg-lite">
       <Topbar></Topbar>
-      <div>
+      <div className="flex gap-x-10">
         <Sidebar></Sidebar>
-        <div>{children}</div>
+        <Outlet></Outlet>
       </div>
     </div>
   );

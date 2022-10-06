@@ -7,7 +7,7 @@ import Fund from "./Fund";
 
 const Topbar = () => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between mb-8">
       <div className="flex items-center flex-1 gap-x-10">
         <img src={logo} alt="logo" />
         <Search></Search>

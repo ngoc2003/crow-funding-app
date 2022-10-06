@@ -8,8 +8,8 @@ const LayoutDashboard = lazy(() => import("./layouts/LayoutDashboard"));
 function App() {
   return (
     <Routes>
-      <Route element={<LayoutDashboard />}>
-        <Route path="/"  element={<DashboardPage />}></Route>
+      <Route element={<LayoutDashboard></LayoutDashboard>}>
+        <Route path="/" exact element={<DashboardPage></DashboardPage>}></Route>
       </Route>
       <Route path="/sign-up" exact element={<SignUpPage />}></Route>
       <Route path="/sign-in" exact element={<SignInPage />}></Route>
