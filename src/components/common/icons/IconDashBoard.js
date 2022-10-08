@@ -3,19 +3,19 @@ import React from "react";
 const IconDashBoard = () => {
   // #1DC071
   // fill #F1FBF7
+  // #A2A2A8
   return (
     <svg
-      width="48"
-      height="48"
-      viewBox="0 0 48 48"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="48" height="48" rx="10" fill="none" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M15 18.5C15 15.8748 15.0281 15 18.5 15C21.9719 15 22 15.8748 22 18.5C22 21.1252 22.0111 22 18.5 22C14.9889 22 15 21.1252 15 18.5Z"
+        d="M3 6.5C3 3.87479 3.02811 3 6.5 3C9.97189 3 10 3.87479 10 6.5C10 9.12521 10.0111 10 6.5 10C2.98893 10 3 9.12521 3 6.5Z"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"
@@ -24,7 +24,7 @@ const IconDashBoard = () => {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M26 18.5C26 15.8748 26.0281 15 29.5 15C32.9719 15 33 15.8748 33 18.5C33 21.1252 33.0111 22 29.5 22C25.9889 22 26 21.1252 26 18.5Z"
+        d="M14 6.5C14 3.87479 14.0281 3 17.5 3C20.9719 3 21 3.87479 21 6.5C21 9.12521 21.0111 10 17.5 10C13.9889 10 14 9.12521 14 6.5Z"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"
@@ -33,7 +33,7 @@ const IconDashBoard = () => {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M15 29.5C15 26.8748 15.0281 26 18.5 26C21.9719 26 22 26.8748 22 29.5C22 32.1252 22.0111 33 18.5 33C14.9889 33 15 32.1252 15 29.5Z"
+        d="M3 17.5C3 14.8748 3.02811 14 6.5 14C9.97189 14 10 14.8748 10 17.5C10 20.1252 10.0111 21 6.5 21C2.98893 21 3 20.1252 3 17.5Z"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"
@@ -42,7 +42,7 @@ const IconDashBoard = () => {
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
-        d="M26 29.5C26 26.8748 26.0281 26 29.5 26C32.9719 26 33 26.8748 33 29.5C33 32.1252 33.0111 33 29.5 33C25.9889 33 26 32.1252 26 29.5Z"
+        d="M14 17.5C14 14.8748 14.0281 14 17.5 14C20.9719 14 21 14.8748 21 17.5C21 20.1252 21.0111 21 17.5 21C13.9889 21 14 20.1252 14 17.5Z"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"

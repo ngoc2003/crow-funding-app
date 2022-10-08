@@ -1,6 +1,6 @@
 import IconEyeToggle from "./IconEyeToggle";
 import IconCampaign from "./IconCampaign";
-import IconWidthraw from "./IconWidthraw";
+import IconWidthraw from "./IconWithdraw";
 import IconDashBoard from "./IconDashBoard";
 import IconPayment from "./IconPayment";
 import IconProfile from "./IconProfile";

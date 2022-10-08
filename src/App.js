@@ -10,6 +10,7 @@ function App() {
     <Routes>
       <Route element={<LayoutDashboard></LayoutDashboard>}>
         <Route path="/" exact element={<DashboardPage></DashboardPage>}></Route>
+        <Route path="*" exact element={<DashboardPage></DashboardPage>}></Route>
       </Route>
       <Route path="/sign-up" exact element={<SignUpPage />}></Route>
       <Route path="/sign-in" exact element={<SignInPage />}></Route>

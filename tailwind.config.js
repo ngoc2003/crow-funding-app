@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         primary: "#1DC071",
         secondary: "#6F49FD",
+        active: '#F1FBF7',
         text1: "#171725",
         text2: "#4B5264",
         "icon-color": "#A2A2A8",
@@ -26,6 +27,8 @@ module.exports = {
         darkSoft: "#24242C",
         darkStroke: "#3A3A43",
         darkRed: "#422C32",
+        current: "currentColor",
+
       },
     },
   },

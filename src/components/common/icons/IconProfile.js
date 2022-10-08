@@ -3,24 +3,23 @@ import React from "react";
 const IconProfile = () => {
   return (
     <svg
-      width="48"
-      height="48"
-      viewBox="0 0 48 48"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="48" height="48" rx="10" fill="white" />
       <circle
-        cx="24"
-        cy="21"
+        cx="12"
+        cy="9"
         r="3"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"
       />
-      <circle cx="24" cy="24" r="11" stroke="#A2A2A8" stroke-width="2" />
+      <circle cx="12" cy="12" r="11" stroke="#A2A2A8" strokeWidth="2" />
       <path
-        d="M31 32C30.5871 30.8525 29.6773 29.8384 28.4117 29.1152C27.146 28.392 25.5953 28 24 28C22.4047 28 20.854 28.392 19.5883 29.1152C18.3227 29.8384 17.4129 30.8525 17 32"
+        d="M19 20C18.5871 18.8525 17.6773 17.8384 16.4117 17.1152C15.146 16.392 13.5953 16 12 16C10.4047 16 8.85398 16.392 7.58835 17.1152C6.32271 17.8384 5.41289 18.8525 5 20"
         stroke="#A2A2A8"
         strokeWidth="2"
         strokeLinecap="round"

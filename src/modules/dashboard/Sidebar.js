@@ -6,6 +6,7 @@ import IconDashBoard from "../../components/common/icons/IconDashBoard";
 import IconLogout from "../../components/common/icons/IconLogout";
 import IconPayment from "../../components/common/icons/IconPayment";
 import IconProfile from "../../components/common/icons/IconProfile";
+import IconWithdraw from "../../components/common/icons/IconWithdraw";
 const sidebarLinks = [
   {
     icon: <IconDashBoard />,
@@ -21,6 +22,11 @@ const sidebarLinks = [
     icon: <IconPayment />,
     name: "Payment",
     url: "/payment",
+  },
+  {
+    icon: <IconWithdraw></IconWithdraw>,
+    name: 'Withdraw',
+    url: '/withdraw'
   },
   {
     icon: <IconProfile />,
@@ -44,15 +50,15 @@ const Sidebar = () => {
           <NavLink
             to={`${item.url}`}
             key={item.name}
-            className={({ isActive }) => ` md:rounded-3xl 
-            ${isActive ? "bg-[#F1FBF7] text-primary  " : ""}
+            className={({ isActive }) => `duration-300 md:rounded-3xl 
+            ${isActive ? "bg-active text-primary iconNav--active p-3" : "hover:bg-lite p-0"}
           `}
           >
             <span>{item.icon}</span>
             <span className="md:hidden ">{item.name}</span>
           </NavLink>
         ) : (
-          <div key={item.name} className="cursor-pointer md:rounded-3xl">
+          <div key={item.name} className="duration-300 cursor-pointer hover:bg-white md:rounded-3xl">
             <span>{item.icon}</span>
             <span className="md:hidden ">{item.name}</span>
           </div>

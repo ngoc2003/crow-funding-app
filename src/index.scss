@@ -11,6 +11,14 @@
   }
 }
 
+@layer components {
+  .iconNav--active{
+    svg *{
+      @apply stroke-primary
+    }
+  }
+}
+
 input:focus + .error-input{
   display: none;
 }
