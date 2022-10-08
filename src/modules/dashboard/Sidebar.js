@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import IconCampaign from "../../components/common/icons/IconCampaign";
-import IconDarkMode from "../../components/common/icons/IconDarkMode";
-import IconDashBoard from "../../components/common/icons/IconDashBoard";
-import IconLogout from "../../components/common/icons/IconLogout";
-import IconPayment from "../../components/common/icons/IconPayment";
-import IconProfile from "../../components/common/icons/IconProfile";
-import IconWithdraw from "../../components/common/icons/IconWithdraw";
+import IconCampaign from "../../components/icons/IconCampaign";
+import IconDarkMode from "../../components/icons/IconDarkMode";
+import IconDashBoard from "../../components/icons/IconDashBoard";
+import IconLogout from "../../components/icons/IconLogout";
+import IconPayment from "../../components/icons/IconPayment";
+import IconProfile from "../../components/icons/IconProfile";
+import IconWithdraw from "../../components/icons/IconWithdraw";
 const sidebarLinks = [
   {
     icon: <IconDashBoard />,

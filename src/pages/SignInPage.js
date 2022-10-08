@@ -2,14 +2,14 @@ import { set } from "lodash";
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
-import Button from "../components/common/button/Button";
-import Checkbox from "../components/common/checkbox/Checkbox";
+import Button from "../components/button/Button";
+// import Checkbox from "../components/common/checkbox/Checkbox";
 import FormGroup from "../components/common/FormGroup";
-import { Input } from "../components/common/input";
-import { Label } from "../components/common/label";
+import { Input } from "../components/input";
+import { Label } from "../components/label";
 import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
-import IconEyeToggle from "../components/common/icons";
+import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 
 const SignInPage = () => {

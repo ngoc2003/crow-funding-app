@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import Error from "../common/Error";
+import { withErrorBoundary } from "react-error-boundary";
 
 const Input = (props) => {
   const {
@@ -42,4 +44,6 @@ Input.propTypes = {
   error: PropTypes.string,
 };
 
-export default Input;
+export default withErrorBoundary(Input.apply, {
+  FallbackComponents: <Error></Error>
+});

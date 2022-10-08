@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../components/common/button/Button";
+import Button from "../../components/button/Button";
 import logo from "../../images/Logo.png";
 import avatar from "../../images/avatarPreview.png";
 import Search from "./Search";
@@ -14,7 +14,7 @@ const Topbar = () => {
       </div>
       <div className="flex items-center justify-end flex-1 gap-x-10">
         <Fund></Fund>
-        <Button secondary className="px-7">
+        <Button secondary className="px-7" type='button'>
           Start a campaign
         </Button>
         <img src={avatar} alt="" className="rounded-full w-13 h-13" />

@@ -6,6 +6,7 @@ import IconPayment from "./IconPayment";
 import IconProfile from "./IconProfile";
 import IconLogout from "./IconLogout";
 import IconDarkMode from "./IconDarkMode";
+import IconFolder from "./IconFolder";
 export default {
   IconPayment,
   IconWidthraw,
@@ -15,4 +16,5 @@ export default {
   IconLogout,
   IconProfile,
   IconDarkMode,
+  IconFolder
 };
