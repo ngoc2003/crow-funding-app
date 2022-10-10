@@ -1,8 +1,9 @@
 import React from "react";
+import IconClose from '../../components/icons/IconClose'
 
 const Search = () => {
   return (
-    <div className="relative">
+    <div className="relative flex-1 z-50">
       <div className=" flex items-center p-2 bg-white rounded-full shadow-lg w-full max-w-[458px]">
         <div className="flex-1 pl-4 pr-5">
           <input
@@ -27,6 +28,18 @@ const Search = () => {
             />
           </svg>
         </button>
+      </div>
+      <div className="pb-6 px-4  overflow-hidden search-results w-[843px] bg-white top-full absolute left-0 z-50 translate-y-5 rounded-[20px] ">
+        <div className="flex items-center justify-between p-3 bg-graySoft">
+          <span className="font-medium text-sm underline">See all 10,124 fundraisier</span>
+          <button className="flex items-center justify-center w-16 h-12 rounded-xl bg-error bg-opacity-20 text-error">
+            <IconClose></IconClose>
+          </button>
+        </div>
+        <div className="py-5">
+          
+        </div>
+
       </div>
     </div>
   );
