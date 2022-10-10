@@ -16,7 +16,11 @@ const DashboardPage = () => {
             <CampaignGrid>
                 {Array(4).fill(0).map( item => <CampaignItem key={v4()}></CampaignItem>)}
             </CampaignGrid>
+            <Gap></Gap>
             <Heading>recent campaign</Heading> 
+            <CampaignGrid>
+                {Array(4).fill(0).map( item => <CampaignItem key={v4()}></CampaignItem>)}
+            </CampaignGrid>
         </div>
     );
 };

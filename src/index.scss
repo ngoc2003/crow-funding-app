@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply font-primary text-base font-normal;
+    @apply max-w-[1440px] mx-auto font-primary text-base font-normal;
     line-height: 1.5;
   }
   input {
@@ -12,13 +12,13 @@
 }
 
 @layer components {
-  .iconNav--active{
-    svg *{
-      @apply stroke-primary
+  .iconNav--active {
+    svg * {
+      @apply stroke-primary;
     }
   }
 }
 
-input:focus + .error-input{
+input:focus + .error-input {
   display: none;
 }

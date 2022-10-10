@@ -5,10 +5,10 @@ import { Outlet } from "react-router-dom";
 
 const LayoutDashboard = () => {
   return (
-    <div className="min-h-screen p-10 bg-lite">
-      <Topbar></Topbar>
-      <div className="flex gap-x-10">
-        <Sidebar></Sidebar>
+    <div className="min-h-screen p-10 bg-lite flex gap-x-10 relative">
+      <Sidebar></Sidebar>
+      <div className="flex-1">
+        <Topbar></Topbar>
         <Outlet></Outlet>
       </div>
     </div>

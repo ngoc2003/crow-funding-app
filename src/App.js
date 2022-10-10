@@ -7,7 +7,7 @@ const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const LayoutDashboard = lazy(() => import("./layouts/LayoutDashboard"));
 function App() {
   return (
-    // <Suspense>
+    <Suspense>
       <Routes>
         <Route element={<LayoutDashboard></LayoutDashboard>}>
           <Route
@@ -24,7 +24,7 @@ function App() {
         <Route path="/sign-up" exact element={<SignUpPage />}></Route>
         <Route path="/sign-in" exact element={<SignInPage />}></Route>
       </Routes>
-    // </Suspense>
+    </Suspense>
   );
 }
 
