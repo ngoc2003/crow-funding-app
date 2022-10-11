@@ -8,6 +8,7 @@ import IconLogout from "./IconLogout";
 import IconDarkMode from "./IconDarkMode";
 import IconFolder from "./IconFolder";
 import IconClose from "./IconClose";
+import IconAdd from "./IconAdd";
 export default {
   IconPayment,
   IconWidthraw,
@@ -18,5 +19,6 @@ export default {
   IconProfile,
   IconDarkMode,
   IconFolder,
-  IconClose
+  IconClose,
+  IconAdd
 };

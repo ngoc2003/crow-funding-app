@@ -1,6 +1,4 @@
 import React from "react";
-import IconFolder from "../../components/icons/IconFolder";
-import { Link } from "react-router-dom";
 import CampaignCategorize from "./parts/CampaignCategorize";
 import CampaignMeta from "./parts/CampaignMeta";
 import CampaignDesc from "./parts/CampaignDesc";

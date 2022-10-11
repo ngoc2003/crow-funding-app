@@ -7,6 +7,7 @@ const Button = ({
   className,
   primary = false,
   secondary = false,
+  third = false,
   isLoading = false,
   fluid = false,
   ...rest
@@ -15,12 +16,12 @@ const Button = ({
     <div className="w-8 h-8 border-4 border-white rounded-full border-t-transparent animate-spin"></div>
   ) : (
     children
-  );
+  )
   return (
     <button
       type={type}
-      className={`py-3 text-base min-h-[56px] font-semibold rounded-xl flex items-center justify-center ${fluid && 'w-full' } px-4 text-white ${
-        primary ? "bg-primary" : secondary ? "bg-secondary" : ""
+      className={`py-3 text-base min-h-[56px] font-semibold rounded-xl flex items-center justify-center ${fluid && 'w-full' } px-4  ${
+        primary ? "bg-primary text-white" : secondary ? "bg-secondary text-white" : third ? 'bg-[#EEEAFD] text-secondary':"text-white"
       } ${isLoading && "pointer-events-none opacity-50"} ${className}`}
       {...rest}
     >
@@ -35,6 +36,8 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  third: PropTypes.bool,
+  fluid: PropTypes.bool
 };
 
 export default Button;
