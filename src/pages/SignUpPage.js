@@ -1,18 +1,19 @@
-import { set } from "lodash";
+// import { set } from "lodash";
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import Checkbox from "../components/checkbox/Checkbox";
-import FormGroup from "../components/common/FormGroup";
-import { Input } from "../components/input";
-import { Label } from "../components/label";
+// import FormGroup from "../components/common/FormGroup";
+import Input from "../components/input/Input";
+import Label from "../components/label/Label";
 import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
+import FormGroup from "../components/common/FormGroup";
 
-const SignUpPage = () => {
+export default function SignUpPage() {
   const { value: showPassword, handleToggleValue: handleTogglePassword } =
     useToggleValue(false);
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
@@ -72,30 +73,29 @@ const SignUpPage = () => {
           </p>
 
           <Form className="text-left">
-            {infos.map((info) => {
-              return (
-                <FormGroup key={info.name}>
-                  <Label>{info.label}</Label>
-                  <Input
-                    name={info.name}
-                    placeholder={info.placeholder}
-                    type={info.type}
-                    error={
-                      errors[info.name] && touched[info.name]
-                        ? errors[info.name]
-                        : ""
-                    }
-                    onChange={(e) => setFieldValue(info.name, e.target.value)}
-                  >
-                    {info.icon ? info.icon : ""}
-                  </Input>
-                </FormGroup>
-              );
-            })}
+            {infos.map((info) => (
+              <FormGroup
+                key={info.name}
+              >
+                <Label>{info.label}</Label>
+                <Input
+                  name={info.name}
+                  placeholder={info.placeholder}
+                  type={info.type}
+                  error={
+                    errors[info.name] && touched[info.name]
+                      ? errors[info.name]
+                      : ""
+                  }
+                  onChange={(e) => setFieldValue(info.name, e.target.value)}
+                >
+                  {info.icon && info.icon }
+                </Input>
+              </FormGroup>
+            ))}
             <div className="flex items-start mb-5 gap-x-5">
               <Checkbox
                 name="term"
-                // onChange={(e) => console.log(e)}
                 checked={acceptTerm}
                 onClick={() => {
                   setFieldValue("term", !acceptTerm);
@@ -114,10 +114,11 @@ const SignUpPage = () => {
                 </p>
               </Checkbox>
             </div>
-            {touched.term && errors.term &&
-              <p className="pb-3 -mt-3 text-xs lg:text-sm text-error">
-            
-             {errors.term}</p>}
+            {touched.term && errors.term && (
+              <p className="pb-4 -mt-5 text-sm font-medium pointer-events-none text-error">
+                {errors.term}
+              </p>
+            )}
 
             <Button fluid primary type="submit">
               Create my account
@@ -127,6 +128,6 @@ const SignUpPage = () => {
       )}
     </Formik>
   );
-};
+}
 
-export default SignUpPage;
+// export default SignUpPage

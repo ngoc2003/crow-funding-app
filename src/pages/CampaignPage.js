@@ -4,7 +4,7 @@ import CampaignGrid from "../modules/campaign/CampaignGrid";
 import CampaignFeatures from "../modules/campaign/CampaignFeatures";
 import IconAdd from "../components/icons/IconAdd";
 import Button from '../components/button/Button'
-const CampaignPage = () => {
+export default function CampaignPage (){
   return (
     <div>
       <div className="flex items-center justify-between px-10 mb-10 bg-white rounded-3xl py-7">
@@ -36,4 +36,3 @@ const CampaignPage = () => {
   );
 };
 
-export default CampaignPage;

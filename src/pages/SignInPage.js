@@ -1,18 +1,17 @@
-import { set } from "lodash";
+// import { set } from "lodash";
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
-// import Checkbox from "../components/common/checkbox/Checkbox";
 import FormGroup from "../components/common/FormGroup";
-import { Input } from "../components/input";
-import { Label } from "../components/label";
+import Input from "../components/input/Input";
+import Label from "../components/label/Label";
 import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 
-const SignInPage = () => {
+export default function SignInPage() {
   const { value: showPassword, handleToggleValue: handleTogglePassword } =
     useToggleValue(false);
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
@@ -53,7 +52,7 @@ const SignInPage = () => {
         console.log("Submit: ", values);
       }}
     >
-      {({ errors, touched, handleSubmit, isSubmitting, setFieldValue }) => (
+      {({ errors, touched, setFieldValue }) => (
         <LayoutAuthen heading="Welcome Back!">
           <p className="mb-8 text-xs font-normal text-text3 lg:text-sm lg:mb-6">
             Dont have an account?{" "}
@@ -91,6 +90,4 @@ const SignInPage = () => {
       )}
     </Formik>
   );
-};
-
-export default SignInPage;
+}

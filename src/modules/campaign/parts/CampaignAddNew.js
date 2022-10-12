@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ReactQuill, { Quill } from "react-quill";
 import Button from "../../../components/button/Button";
-import FormGroup from "../../../components/common/FormGroup";
+import {FormGroup} from "../../../components/common/FormGroup";
 import { Label } from "../../../components/label";
 import { Input } from "../../../components/input";
 
