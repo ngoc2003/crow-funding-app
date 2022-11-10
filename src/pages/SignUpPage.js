@@ -24,25 +24,19 @@ export default function SignUpPage() {
       name: "name",
       label: "Full name *",
       placeholder: "John Doe",
-      type: "text",
+      icon: false,
     },
     {
       name: "email",
       label: "Email address *",
       placeholder: "example@gmail.com",
-      type: "email",
+      icon: false,
     },
     {
       name: "password",
       label: "Password *",
       placeholder: "Type your own password here",
-      type: showPassword ? "text" : "password",
-      icon: (
-        <IconEyeToggle
-          toggle={showPassword}
-          onClick={handleTogglePassword}
-        ></IconEyeToggle>
-      ),
+      icon: true,
     },
   ];
 
@@ -74,14 +68,12 @@ export default function SignUpPage() {
 
           <Form className="text-left">
             {infos.map((info) => (
-              <FormGroup
-                key={info.name}
-              >
+              <FormGroup key={info.name}>
                 <Label>{info.label}</Label>
                 <Input
                   name={info.name}
                   placeholder={info.placeholder}
-                  type={info.type}
+                  icon={info.icon}
                   error={
                     errors[info.name] && touched[info.name]
                       ? errors[info.name]
@@ -89,7 +81,7 @@ export default function SignUpPage() {
                   }
                   onChange={(e) => setFieldValue(info.name, e.target.value)}
                 >
-                  {info.icon && info.icon }
+                  {info.icon && info.icon}
                 </Input>
               </FormGroup>
             ))}

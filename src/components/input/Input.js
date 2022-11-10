@@ -1,43 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-
+import IconEyeToggle from "../icons/IconEyeToggle";
 Input.propTypes = {
   name: PropTypes.string,
-  type: PropTypes.string,
   placeholder: PropTypes.string,
   error: PropTypes.string,
 };
 
-export default function Input({ children, ...props }) {
-  const { error = "", name, type = "text", placeholder, ...rest } = props;
+export default function Input({ children, icon = true, ...props }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const { error = "", name, placeholder, ...rest } = props;
+  const handleTogglePassword = () => {
+    console.log(showPassword);
+    setShowPassword(!showPassword);
+  };
   return (
-    <div className="relative">
-      <input
-        type={type}
-        placeholder={placeholder}
-        className={`${children && "pr-16"} outline-none ${
-          !error && "focus:outline-primary"
-        }  bg-transparent w-full py-4 dark:text-white px-6 border rounded-xl text-text1 font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4 ${
+    <>
+      <div
+        className={`items-center flex border rounded-xl overflow-hidden ${
           error.length > 0
             ? "border-error"
             : "border-stroke dark:border-darkStroke"
-        }  `}
-        {...rest}
-      />
-      {children && (
-        <div className="absolute inline-block right-6 top-2/4 -translate-y-2/4">
-          {/* {children} */}
-        </div>
-      )}
+        }`}
+      >
+        <input
+          type={!showPassword ? "password" : "text"}
+          placeholder={placeholder}
+          className={`outline-none   bg-transparent w-full py-4 dark:text-white px-3   text-text1 font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4   `}
+          {...rest}
+        />
+        {icon && (
+          <IconEyeToggle
+            toggle={showPassword}
+            onClick={handleTogglePassword}
+          ></IconEyeToggle>
+        )}
+      </div>
       {error.length > 0 && (
         <span
-          className={
-            " text-sm font-medium pointer-events-none text-error "
-          }
+          className={" text-sm font-medium pointer-events-none text-error "}
         >
           {error}
         </span>
       )}
-    </div>
+    </>
   );
 }
