@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
-import Button from "../components/button/Button";
+import { Button, Dropdown} from "antd";
+
 import Checkbox from "../components/checkbox/Checkbox";
 // import FormGroup from "../components/common/FormGroup";
 import Input from "../components/input/Input";
@@ -112,7 +113,7 @@ export default function SignUpPage() {
               </p>
             )}
 
-            <Button fluid primary type="submit">
+            <Button block className="primary">
               Create my account
             </Button>
           </Form>

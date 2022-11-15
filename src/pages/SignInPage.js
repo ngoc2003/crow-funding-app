@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
-import Button from "../components/button/Button";
+import { Button, Dropdown } from "antd";
+
 import FormGroup from "../components/common/FormGroup";
 import Input from "../components/input/Input";
 import Label from "../components/label/Label";
@@ -12,8 +13,6 @@ import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 
 export default function SignInPage() {
-  const { value: showPassword, handleToggleValue: handleTogglePassword } =
-    useToggleValue(false);
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
     useToggleValue(false);
 
@@ -22,19 +21,12 @@ export default function SignInPage() {
       name: "email",
       label: "Email address *",
       placeholder: "example@gmail.com",
-      type: "email",
     },
     {
       name: "password",
       label: "Password *",
       placeholder: "Type your own password here",
-      type: showPassword ? "text" : "password",
-      icon: (
-        <IconEyeToggle
-          toggle={showPassword}
-          onClick={handleTogglePassword}
-        ></IconEyeToggle>
-      ),
+      icon: true,
     },
   ];
   return (
@@ -69,7 +61,7 @@ export default function SignInPage() {
                   <Input
                     name={info.name}
                     placeholder={info.placeholder}
-                    type={info.type}
+                    icon={info?.icon}
                     error={
                       errors[info.name] && touched[info.name]
                         ? errors[info.name]
@@ -82,7 +74,7 @@ export default function SignInPage() {
                 </FormGroup>
               );
             })}
-            <Button fluid primary type="submit">
+            <Button block className="primary">
               Create my account
             </Button>
           </Form>

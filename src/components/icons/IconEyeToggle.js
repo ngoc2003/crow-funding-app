@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 const IconEyeToggle = ({ toggle = false, onClick = () => {} }) => {
-  if (toggle)
+  if (!toggle)
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"

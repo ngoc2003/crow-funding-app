@@ -7,11 +7,10 @@ Input.propTypes = {
   error: PropTypes.string,
 };
 
-export default function Input({ children, icon = true, ...props }) {
+export default function Input({ children, icon = false, ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const { error = "", name, placeholder, ...rest } = props;
   const handleTogglePassword = () => {
-    console.log(showPassword);
     setShowPassword(!showPassword);
   };
   return (
@@ -24,7 +23,7 @@ export default function Input({ children, icon = true, ...props }) {
         }`}
       >
         <input
-          type={!showPassword ? "password" : "text"}
+          type={!showPassword && icon ? "password" : "text"}
           placeholder={placeholder}
           className={`outline-none   bg-transparent w-full py-4 dark:text-white px-3   text-text1 font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4   `}
           {...rest}

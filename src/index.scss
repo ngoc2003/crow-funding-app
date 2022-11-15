@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~antd/dist/antd.css";
 @layer base {
   body {
     @apply max-w-[1440px] mx-auto font-primary text-base font-normal;
@@ -17,5 +18,7 @@
       @apply stroke-primary;
     }
   }
+
 }
 
+@import "./style/button";
