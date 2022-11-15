@@ -15,8 +15,6 @@ import FormGroup from "../components/common/FormGroup";
 import Button from "../components/common/Button";
 
 export default function SignUpPage() {
-  const { value: showPassword, handleToggleValue: handleTogglePassword } =
-    useToggleValue(false);
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
     useToggleValue(false);
 

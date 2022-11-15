@@ -17,6 +17,7 @@ const DropdownInput = ({ data, item, name = "", setItem = () => {} }) => {
           textAlign: "left",
           height: "100% ",
           borderRadius: "12px",
+          padding: "12px 16px ",
         }}
       >
         {item || <span className="text-text4">Select {name}</span>}

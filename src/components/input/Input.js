@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import IconEyeToggle from "../icons/IconEyeToggle";
+import useToggleValue from '../../hooks/useToggleValue'
 Input.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
@@ -8,11 +9,10 @@ Input.propTypes = {
 };
 
 export default function Input({ children, icon = false, ...props }) {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  const { value: showPassword, handleToggleValue: setShowPassword } =
+    useToggleValue(false);
   const { error = "", name, placeholder, ...rest } = props;
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
   return (
     <>
       <div
@@ -31,7 +31,7 @@ export default function Input({ children, icon = false, ...props }) {
         {icon && (
           <IconEyeToggle
             toggle={showPassword}
-            onClick={handleTogglePassword}
+            onClick={setShowPassword}
           ></IconEyeToggle>
         )}
       </div>
