@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
-import { Button, Dropdown } from "antd";
 
 import FormGroup from "../components/common/FormGroup";
 import Input from "../components/input/Input";
@@ -11,6 +10,7 @@ import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
+import Button from "../components/common/Button";
 
 export default function SignInPage() {
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
@@ -74,7 +74,7 @@ export default function SignInPage() {
                 </FormGroup>
               );
             })}
-            <Button block className="primary">
+            <Button fluid primary type='submit'>
               Create my account
             </Button>
           </Form>

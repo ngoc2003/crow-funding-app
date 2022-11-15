@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import "~antd/dist/antd.css";
+@import 'react-quill/dist/quill.snow.css';
+
 @layer base {
   body {
     @apply max-w-[1440px] mx-auto font-primary text-base font-normal;
@@ -21,4 +23,10 @@
 
 }
 
-@import "./style/button";
+.ql-editor {
+  min-height: 200px;
+}
+.ql-toolbar {
+  @apply bg-text4 bg-opacity-30 text-center
+}
+

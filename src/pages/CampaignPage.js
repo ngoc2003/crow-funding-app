@@ -3,11 +3,12 @@ import Heading from "../components/common/Heading";
 import CampaignGrid from "../modules/campaign/CampaignGrid";
 import CampaignFeatures from "../modules/campaign/CampaignFeatures";
 import IconAdd from "../components/icons/IconAdd";
-import { Button, Dropdown} from "antd";
+import Button from "../components/common/Button";
 
 export default function CampaignPage (){
   return (
     <div>
+    
       <div className="flex items-center justify-between px-10 mb-10 bg-white rounded-3xl py-7">
         <div className="flex items-start gap-x-6">
           <div className="flex items-center justify-center w-12 h-12 text-white duration-300 rounded-full cursor-pointer bg-secondary bg-opacity-40 hover:bg-opacity-90">
@@ -23,7 +24,7 @@ export default function CampaignPage (){
             <a href="/" className="text-sm text-primary">Need any help? Learn more . . .</a>
           </div>
         </div>
-        <Button className="third">Create campaign</Button>
+        <Button third>Create campaign</Button>
       </div>
       <Heading number={4}>Your campaign</Heading>
       <CampaignGrid row>

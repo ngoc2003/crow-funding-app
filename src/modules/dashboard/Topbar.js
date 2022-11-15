@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Dropdown} from "antd";
 
 import avatar from "../../images/avatarPreview.png";
 import Search from "./Search";
 import Fund from "./Fund";
+import Button from "../../components/common/Button";
 
 const Topbar = () => {
   return (
@@ -13,7 +13,7 @@ const Topbar = () => {
       </div>
       <div className="flex items-center justify-end flex-1 gap-x-10">
         <Fund></Fund>
-        <Button href="/start-campaign"  className="secondary" >
+        <Button to="/start-campaign"  secondary >
           Start a campaign
         </Button>
         <img src={avatar} alt="" className="rounded-full w-13 h-13" />

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ReactQuill, { Quill } from "react-quill";
@@ -6,48 +6,25 @@ import FormGroup from "../../../components/common/FormGroup";
 import Label from "../../../components/label/Label";
 import Input from "../../../components/input/Input";
 import "antd/dist/antd.css";
-import { DownOutlined, UserOutlined, SmileOutlined } from "@ant-design/icons";
-import { Button, Dropdown} from "antd";
-let in4 = [
-  {
-    name: "email",
-    label: "Email address *",
-    placeholder: "example@gmail.com",
-    icon: false,
-  },
-  {
-    name: "password",
-    label: "Password *",
-    placeholder: "Type your own password here",
-    icon: true,
-  },
-];
+import Heading2 from "../../../components/common/Heading2";
+import Textarea from "../../../components/common/Textarea";
+import ImageUploader from "quill-image-uploader";
+import { axios } from "axios";
+import DropdownInput from "../../../components/dropdown/DropdownInput";
+Quill.register("modules/imageUploader", ImageUploader);
 
 const CampaignAddNew = () => {
-  const items = [
+  const [category, setCategory] = useState("");
+  const categories = [
     {
-      label: "1st menu item",
-      key: "1",
-      icon: <UserOutlined />,
+      label: "Architecture",
+      key: "Architecture",
     },
     {
-      label: "2nd menu item",
-      key: "2",
-      icon: <UserOutlined />,
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
-      icon: <UserOutlined />,
+      label: "Crypto",
+      key: "Crypto",
     },
   ];
-  const handleMenuClick = (e) => {
-    console.log(e);
-  };
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -60,8 +37,20 @@ const CampaignAddNew = () => {
           [{ color: ["#FFFFFF", "#e60000"] }],
           ["code-block"],
         ],
-        handlers: {
-          // image: imageHandlers,
+        imageUploader: {
+          upload: async (file) => {
+            // const bodyFormData = new FormData();
+            // bodyFormData.append("image", file);
+            // const response = await axios({
+            //   method: "post",
+            //   url: "",
+            //   data: "bodyFormData",
+            //   headers: {
+            //     "Content-Type": "multipart/form-data",
+            //   },
+            // });
+            // return response.data.data.url;
+          },
         },
       },
     }),
@@ -73,22 +62,21 @@ const CampaignAddNew = () => {
         title: "",
         description: "",
         category: "",
-        story: ""
+        story: "",
       }}
       validationSchema={Yup.object({
-        // categorize: Yup.string().required().oneOf(["Event", "Blog"]),
         title: Yup.string().required("Vui Lòng Điền Trường Này"),
         story: Yup.string().required("Vui Lòng Điền Trường Này"),
         description: Yup.string().required("Vui Lòng Điền Trường Này"),
       })}
       onSubmit={(values) => {
-        // handleSubmit(values);
       }}
     >
       {({ errors, touched, setFieldValue }) => {
         return (
-          <div>
-            <div className="flex gap-8">
+          <div className="text-center">
+            <Heading2>Start a Campaign</Heading2>
+            <div className="flex gap-8 ">
               <FormGroup className="flex-1">
                 <Label>Campaign title</Label>
                 <Input
@@ -100,27 +88,54 @@ const CampaignAddNew = () => {
               </FormGroup>
               <FormGroup className="flex-1">
                 <Label>Select a category *</Label>
-                <Dropdown menu={menuProps} style={{ display: "flex" }}>
-                  <Button 
-                    style={{
-                      textAlign: "left",
-                      height: "100% ",
-                      color: "gray",
-                      borderRadius: "12px",
-                    }}
-                  >
-                    Select a category
-                  </Button>
-                </Dropdown>
+                <DropdownInput
+                  setItem={setCategory}
+                  data={categories}
+                  item={category}
+                  name="category"
+                ></DropdownInput>
               </FormGroup>
             </div>
             <FormGroup>
-
               <Label>Short Description *</Label>
-              <Input name="description" placeholder="Write a short description" error={errors.description && touched.description ? errors.title : ""}
-                  onChange={(e) => setFieldValue("description", e.target.value)}></Input>
+              <Textarea
+                name="description"
+                placeholder="Write a short description"
+                error={
+                  errors.description && touched.description ? errors.title : ""
+                }
+                onChange={(e) => setFieldValue("description", e.target.value)}
+              ></Textarea>
             </FormGroup>
-            <Button className="primary">Xin chào</Button>
+            <FormGroup>
+              <Label>Story *</Label>
+              <ReactQuill
+                modules={modules}
+                placeholder="Write your story"
+                className="border outline-none hover:border-blue-400 durration-200"
+                theme="snow"
+                onChange={(e) => setFieldValue("story", e.target.value)}
+              ></ReactQuill>
+            </FormGroup>
+            <div className="flex">
+              <div className="flex-1">
+                <FormGroup>
+                  <Label>Goal *</Label>
+                  <Input placeholder="$0.00 USD"></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Amount Prefilled</Label>
+                  <Input placeholder="Amount Prefilled"></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Campaign End Method</Label>
+                </FormGroup>
+                <FormGroup>
+                  <Label>Goal *</Label>
+                  <Input placeholder="$0.00 USD"></Input>
+                </FormGroup>
+              </div>
+            </div>
           </div>
         );
       }}

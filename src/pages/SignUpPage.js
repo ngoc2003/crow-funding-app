@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { Link } from "react-router-dom";
-import { Button, Dropdown} from "antd";
 
 import Checkbox from "../components/checkbox/Checkbox";
 // import FormGroup from "../components/common/FormGroup";
@@ -13,6 +12,7 @@ import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 import FormGroup from "../components/common/FormGroup";
+import Button from "../components/common/Button";
 
 export default function SignUpPage() {
   const { value: showPassword, handleToggleValue: handleTogglePassword } =
@@ -113,7 +113,7 @@ export default function SignUpPage() {
               </p>
             )}
 
-            <Button block className="primary">
+            <Button primary fluid type="submit">
               Create my account
             </Button>
           </Form>
