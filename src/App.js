@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-const CampaignAddNew = lazy(() => import("./modules/campaign/parts/CampaignAddNew"))
+import CampaignView from "./modules/campaign/parts/CampaignView";
+const CampaignAddNew = lazy(() =>
+  import("./modules/campaign/parts/CampaignAddNew")
+);
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 // import SignUpPage from "./pages/SignUpPage";
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
@@ -31,6 +34,11 @@ function App() {
             path="/campaign"
             exact
             element={<CampaignPage></CampaignPage>}
+          ></Route>
+          <Route
+            path="/campaign/:slug"
+            exact
+            element={<CampaignView></CampaignView>}
           ></Route>
           <Route
             path="/start-campaign"

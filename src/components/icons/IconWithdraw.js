@@ -9,7 +9,7 @@ const IconWithdraw = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_2304_6128)">
+      <g clipPath="url(#clip0_2304_6128)">
         <path
           d="M4.46098 11H2.1C1.49249 11 1 10.5026 1 9.88889V2.11111C1 1.49746 1.49249 1 2.1 1H21.9C22.5075 1 23 1.49746 23 2.11111V9.88889C23 10.5026 22.5075 11 21.9 11H19.8207"
           stroke="#A2A2A8"
