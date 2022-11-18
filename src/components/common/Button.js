@@ -12,6 +12,7 @@ const Button = ({
   third = false,
   fluid = false,
   isLoading = false,
+  onClick=() => {},
   ...rest
 }) => {
   const child = !!isLoading ? (
@@ -22,6 +23,7 @@ const Button = ({
   const btn = (
     <button
       type={type}
+      onClick={onClick}
       className={`py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center text-white ${
         primary
           ? "bg-primary"
@@ -43,7 +45,7 @@ const Button = ({
 
 Button.propTypes = {
   type: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   isLoading: PropTypes.bool,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,

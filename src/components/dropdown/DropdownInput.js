@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Dropdown } from "antd";
 import PropTypes from "prop-types";
-const DropdownInput = ({ data, item, name = "", setItem = () => {} }) => {
+const DropdownInput = ({ data, item='', name = "", setItem = () => {} }) => {
   const handleMenuClick = (e) => {
     setItem(e.key);
   };
@@ -9,7 +9,6 @@ const DropdownInput = ({ data, item, name = "", setItem = () => {} }) => {
     items: data,
     onClick: handleMenuClick,
   };
-  console.log(data);
   return (
     <Dropdown menu={menu} style={{ display: "flex" }}>
       <Button
@@ -27,10 +26,10 @@ const DropdownInput = ({ data, item, name = "", setItem = () => {} }) => {
 };
 
 Dropdown.propTypes = {
-  data: PropTypes.array.isRequired,
-  item: PropTypes.string.isRequired,
+  data: PropTypes.array,
+  item: PropTypes.string,
   name: PropTypes.string,
-  setItem: PropTypes.func.isRequired,
+  setItem: PropTypes.func,
 };
 
 export default DropdownInput;

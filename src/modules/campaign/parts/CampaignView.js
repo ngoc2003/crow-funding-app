@@ -76,16 +76,22 @@ const CampaignView = () => {
         <div className="flex items-center font-semibold gap-x-14 text-text3">
           <span className="text-secondary">Campaign</span>
           <span>Risks</span>
-          <span>FAQ</span>  
+          <span>FAQ</span>
           <span>Updates</span>
           <span>Comments</span>
         </div>
         <Button primary>Back this project</Button>
       </div>
       <div className="grid gap-x-10 grid-cols-[1.3fr,1fr]">
-        <div className='bg-white'>
+        <div>
           <h4 className="mb-5 font-semibold text-black">Story</h4>
-          
+          <div className="bg-white">
+            {/* 
+            
+            Code here
+            
+             */}
+          </div>
         </div>
         <div>
           <CampaignSupport></CampaignSupport>

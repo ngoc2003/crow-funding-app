@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ReactQuill, { Quill } from "react-quill";
@@ -9,15 +9,31 @@ import "antd/dist/antd.css";
 import Heading2 from "../../../components/common/Heading2";
 import Textarea from "../../../components/common/Textarea";
 import ImageUploader from "quill-image-uploader";
-import { axios } from "axios";
-import DropdownInput from "../../../components/dropdown/DropdownInput";
+import * as axios from 'axios'
 import Button from "../../../components/common/Button";
-Quill.register("modules/imageUploader", ImageUploader);
+import DropdownInput from "../../../components/dropdown/DropdownInput";
+// Quill.register("modules/imageUploader", ImageUploader);
 
 const CampaignAddNew = () => {
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [country, setCountry] = useState("");
+  const [countries, setCountries] = useState("");
+  
+  console.log(countries)
+  useEffect(() => {
+    async function fetchCountry() {
+      const response = await axios.get(
+        `https://restcountries.com/v2/regionalbloc/asean`
+      );
+      setCountries(
+        response.data.map((item) => {
+          return { label: item.name, key: item.name };
+        })
+      );
+    }
+    fetchCountry();
+  }, []);
   const categories = [
     {
       label: "Architecture",
@@ -42,20 +58,21 @@ const CampaignAddNew = () => {
       key: "Method 3",
     },
   ];
-  const countries = [
-    {
-      label: "Viet Nam",
-      key: "Viet Nam",
-    },
-    {
-      label: "US",
-      key: "US",
-    },
-    {
-      label: "UK",
-      key: "UK",
-    },
-  ];
+  // const countries = [
+  //   {
+  //     label: "Viet Nam",
+  //     key: "Viet Nam",
+  //   },
+  //   {
+  //     label: "US",
+  //     key: "US",
+  //   },
+  //   {
+  //     label: "UK",
+  //     key: "UK",
+  //   },
+  // ];
+  console.log(category);
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -68,21 +85,21 @@ const CampaignAddNew = () => {
           [{ color: ["#FFFFFF", "#e60000"] }],
           ["code-block"],
         ],
-        imageUploader: {
-          upload: async (file) => {
-            // const bodyFormData = new FormData();
-            // bodyFormData.append("image", file);
-            // const response = await axios({
-            //   method: "post",
-            //   url: "",
-            //   data: "bodyFormData",
-            //   headers: {
-            //     "Content-Type": "multipart/form-data",
-            //   },
-            // });
-            // return response.data.data.url;
-          },
-        },
+        // imageUploader: {
+        //   upload: async (file) => {
+        //     // const bodyFormData = new FormData();
+        //     // bodyFormData.append("image", file);
+        //     // const response = await axios({
+        //     //   method: "post",
+        //     //   url: "",
+        //     //   data: "bodyFormData",
+        //     //   headers: {
+        //     //     "Content-Type": "multipart/form-data",
+        //     //   },
+        //     // });
+        //     // return response.data.data.url;
+        //   },
+        // },
       },
     }),
     []
@@ -92,50 +109,52 @@ const CampaignAddNew = () => {
       initialValues={{
         title: "",
         description: "",
-        category: "",
+        // category: category,
         story: "",
         goal: "",
         raisedAmount: "",
         amountPrefilled: "",
         video: "",
-        endMethod: method,
-        country: country,
+        // endMethod: method,
+        // country: country,
         startDate: "",
         endDate: "",
       }}
       validationSchema={Yup.object({
-        title: Yup.string().required("Vui Lòng Điền Trường Này"),
-        story: Yup.string().required("Vui Lòng Điền Trường Này"),
-        description: Yup.string().required("Vui Lòng Điền Trường Này"),
+        // title: Yup.string().required("Vui Lòng Điền Trường Này"),
+        // story: Yup.string().required("Vui Lòng Điền Trường Này"),
+        // description: Yup.string().required("Vui Lòng Điền Trường Này"),
       })}
-      onSubmit={(values) => {}}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
     >
       {({ errors, touched, setFieldValue }) => {
         return (
-          <div className="pb-5 text-center">
+          <Form className="pb-5 text-center">
             <Heading2>Start a Campaign</Heading2>
             <div className="flex gap-8 ">
               <FormGroup className="flex-1">
-                <Label>Campaign title</Label>
+                <Label htmlFor="title">Campaign title</Label>
                 <Input
                   name="title"
                   placeholder="Write a title *"
                   error={errors.title && touched.title ? errors.title : ""}
-                  onChange={(e) => setFieldValue("email", e.target.value)}
+                  onChange={(e) => setFieldValue("title", e.target.value)}
                 ></Input>
               </FormGroup>
               <FormGroup className="flex-1">
-                <Label>Select a category *</Label>
+                <Label htmlFor="category">Select a category *</Label>
                 <DropdownInput
                   setItem={setCategory}
                   data={categories}
                   item={category}
-                  name="category"
+                  // name="category"
                 ></DropdownInput>
               </FormGroup>
             </div>
             <FormGroup>
-              <Label>Short Description *</Label>
+              <Label htmlFor="desctiption">Short Description *</Label>
               <Textarea
                 name="description"
                 placeholder="Write a short description"
@@ -146,65 +165,94 @@ const CampaignAddNew = () => {
               ></Textarea>
             </FormGroup>
             <FormGroup>
-              <Label>Story *</Label>
-              <ReactQuill
-                modules={modules}
-                placeholder="Write your story"
-                className="border outline-none hover:border-blue-400 durration-200"
-                theme="snow"
-                onChange={(e) => setFieldValue("story", e.target.value)}
-              ></ReactQuill>
+              <Label htmlFor="story">Story *</Label>
+              <Field name="story">
+                {({ field }) => (
+                  <ReactQuill
+                    theme="snow"
+                    modules={modules}
+                    value={field.value}
+                    onChange={field.onChange(field.name)}
+                    placeholder="Write your story"
+                    className="border outline-none hover:border-blue-400 durration-200"
+                  />
+                )}
+              </Field>
             </FormGroup>
             <div className="flex gap-8 mb-5">
               <div className="flex-1">
                 <FormGroup>
-                  <Label>Goal *</Label>
-                  <Input placeholder="$0.00 USD" onChange={(e) => setFieldValue("goal", e.target.value)}></Input>
+                  <Label htmlFor="goal">Goal *</Label>
+                  <Input
+                    placeholder="$0.00 USD"
+                    onChange={(e) => setFieldValue("goal", e.target.value)}
+                  ></Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Amount Prefilled</Label>
-                  <Input placeholder="Amount Prefilled" onChange={(e) => setFieldValue("amountPrefilled", e.target.value)}></Input>
+                  <Label htmlFor="amountPrefilled">Amount Prefilled</Label>
+                  <Input
+                    placeholder="Amount Prefilled"
+                    onChange={(e) =>
+                      setFieldValue("amountPrefilled", e.target.value)
+                    }
+                  ></Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Campaign End Method</Label>
+                  <Label htmlFor="method">Campaign End Method</Label>
                   <DropdownInput
-                    name="method"
+                    // name="method"
                     data={methods}
                     item={method}
                     setItem={setMethod}
                   ></DropdownInput>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Start Date</Label>
-                  <Input placeholder="Start Date" onChange={(e) => setFieldValue("startDate", e.target.value)}></Input>
+                  <Label htmlFor="startDate">Start Date</Label>
+                  <Input
+                    placeholder="Start Date"
+                    onChange={(e) => setFieldValue("startDate", e.target.value)}
+                  ></Input>
                 </FormGroup>
               </div>
               <div className="flex-1">
                 <FormGroup>
-                  <Label>Raised Amount *</Label>
-                  <Input placeholder="$0.00 USD" onChange={(e) => setFieldValue("raisedAmount", e.target.value)}></Input>
+                  <Label htmlFor="raisedAmount">Raised Amount *</Label>
+                  <Input
+                    placeholder="$0.00 USD"
+                    onChange={(e) =>
+                      setFieldValue("raisedAmount", e.target.value)
+                    }
+                  ></Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Video</Label>
-                  <Input placeholder="Video" onChange={(e) => setFieldValue("video", e.target.value)}></Input>
+                  <Label htmlFor="video">Video</Label>
+                  <Input
+                    placeholder="Video"
+                    onChange={(e) => setFieldValue("video", e.target.value)}
+                  ></Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label>Country</Label>
+                  <Label htmlFor="country">Country</Label>
                   <DropdownInput
-                    name="country"
+                    // name="country"
                     data={countries}
                     item={country}
                     setItem={setCountry}
                   ></DropdownInput>
                 </FormGroup>
                 <FormGroup>
-                  <Label>End Date</Label>
-                  <Input placeholder="End Date" onChange={(e) => setFieldValue("endDate", e.target.value)}></Input>
+                  <Label htmlFor="endDate">End Date</Label>
+                  <Input
+                    placeholder="End Date"
+                    onChange={(e) => setFieldValue("endDate", e.target.value)}
+                  ></Input>
                 </FormGroup>
               </div>
             </div>
-            <Button type="submit" primary>Submit new campaign</Button>
-          </div>
+            <Button type="submit" primary>
+              Submit new campaign
+            </Button>
+          </Form>
         );
       }}
     </Formik>
