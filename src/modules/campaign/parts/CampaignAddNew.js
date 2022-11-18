@@ -58,21 +58,6 @@ const CampaignAddNew = () => {
       key: "Method 3",
     },
   ];
-  // const countries = [
-  //   {
-  //     label: "Viet Nam",
-  //     key: "Viet Nam",
-  //   },
-  //   {
-  //     label: "US",
-  //     key: "US",
-  //   },
-  //   {
-  //     label: "UK",
-  //     key: "UK",
-  //   },
-  // ];
-  console.log(category);
   const modules = useMemo(
     () => ({
       toolbar: {
