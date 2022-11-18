@@ -9,18 +9,16 @@ import "antd/dist/antd.css";
 import Heading2 from "../../../components/common/Heading2";
 import Textarea from "../../../components/common/Textarea";
 import ImageUploader from "quill-image-uploader";
-import * as axios from 'axios'
+import * as axios from "axios";
 import Button from "../../../components/common/Button";
 import DropdownInput from "../../../components/dropdown/DropdownInput";
 // Quill.register("modules/imageUploader", ImageUploader);
-
+import DateInput from "../../../components/input/DateInput";
 const CampaignAddNew = () => {
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState("");
-  
-  console.log(countries)
   useEffect(() => {
     async function fetchCountry() {
       const response = await axios.get(
@@ -193,10 +191,11 @@ const CampaignAddNew = () => {
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="startDate">Start Date</Label>
-                  <Input
-                    placeholder="Start Date"
-                    onChange={(e) => setFieldValue("startDate", e.target.value)}
-                  ></Input>
+                  <DateInput
+                    onChange={(date, dateString) =>
+                      setFieldValue("startDate", dateString)
+                    }
+                  />
                 </FormGroup>
               </div>
               <div className="flex-1">
@@ -227,10 +226,11 @@ const CampaignAddNew = () => {
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="endDate">End Date</Label>
-                  <Input
-                    placeholder="End Date"
-                    onChange={(e) => setFieldValue("endDate", e.target.value)}
-                  ></Input>
+                  <DateInput
+                    onChange={(date, dateString) =>
+                      setFieldValue("endDate", dateString)
+                    }
+                  />
                 </FormGroup>
               </div>
             </div>

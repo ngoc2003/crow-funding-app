@@ -21,16 +21,30 @@
     }
   }
 }
-.scroll-hidden{
-  -ms-overflow-style:none;
+.scroll-hidden {
+  -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 }
 
 .ReactModal__Body--open {
   overflow: hidden;
+}
+.ant-picker {
+  margin: 10px !important;
+  flex: 1;
+  border: none !important;
+  background-color: transparent !important;
+  .ant-picker-focus {
+    outline: none !important;
+  }
+}
+
+.ant-dropdown-menu {
+  max-height: 150px !important;
+  overflow-y: auto;
 }
 .ql-editor {
   min-height: 200px;
