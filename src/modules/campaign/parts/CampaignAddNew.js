@@ -12,13 +12,17 @@ import ImageUploader from "quill-image-uploader";
 import * as axios from "axios";
 import Button from "../../../components/common/Button";
 import DropdownInput from "../../../components/dropdown/DropdownInput";
+import { toast } from "react-toastify";
 // Quill.register("modules/imageUploader", ImageUploader);
 import DateInput from "../../../components/input/DateInput";
+import { apiURL, imgbbAPI } from "../../../config/config";
+import ImageUpload from "../../../components/image/ImageUpload";
 const CampaignAddNew = () => {
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState("");
+  const [image, setImage] = useState("")
   useEffect(() => {
     async function fetchCountry() {
       const response = await axios.get(
@@ -38,8 +42,36 @@ const CampaignAddNew = () => {
       key: "Architecture",
     },
     {
-      label: "Crypto",
-      key: "Crypto",
+      label: "Film",
+      key: "Film",
+    },
+    {
+      label: "Home",
+      key: "Home",
+    },
+    {
+      label: "Education",
+      key: "Education",
+    },
+    {
+      label: "Camera",
+      key: "Camera",
+    },
+    {
+      label: "Food",
+      key: "Food",
+    },
+    {
+      label: "Comics",
+      key: "Comics",
+    },
+    {
+      label: "Clothes",
+      key: "Clothes",
+    },
+    {
+      label: "Real Estate",
+      key: "Real Estate",
     },
   ];
   const methods = [
@@ -68,25 +100,41 @@ const CampaignAddNew = () => {
           [{ color: ["#FFFFFF", "#e60000"] }],
           ["code-block"],
         ],
-        // imageUploader: {
-        //   upload: async (file) => {
-        //     // const bodyFormData = new FormData();
-        //     // bodyFormData.append("image", file);
-        //     // const response = await axios({
-        //     //   method: "post",
-        //     //   url: "",
-        //     //   data: "bodyFormData",
-        //     //   headers: {
-        //     //     "Content-Type": "multipart/form-data",
-        //     //   },
-        //     // });
-        //     // return response.data.data.url;
-        //   },
-        // },
+        imageUploader: {
+          upload: async (file) => {
+            const bodyFormData = new FormData();
+            bodyFormData.append("image", file);
+            const response = await axios({
+              method: "post",
+              url: imgbbAPI,
+              data: bodyFormData,
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            });
+            return response.data.data.url;
+          },
+        },
       },
     }),
     []
   );
+
+  const handleAddNewCampaign = async (values) => {
+    try {
+      console.log(values)
+      await axios.post(`${apiURL}/campaigns`, {
+        ...values,
+        category: category,
+        endMethod: method,
+        country: country,
+        image: image,
+      });
+      // toast.success("ADD SUCCESSFULLY");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Formik
       initialValues={{
@@ -109,7 +157,7 @@ const CampaignAddNew = () => {
         // description: Yup.string().required("Vui Lòng Điền Trường Này"),
       })}
       onSubmit={(values) => {
-        console.log(values);
+        handleAddNewCampaign(values);
       }}
     >
       {({ errors, touched, setFieldValue }) => {
@@ -136,6 +184,10 @@ const CampaignAddNew = () => {
                 ></DropdownInput>
               </FormGroup>
             </div>
+            <FormGroup>
+              <Label htmlFor="image"></Label>
+              <ImageUpload onChange={setImage} name='Name'></ImageUpload>
+            </FormGroup>
             <FormGroup>
               <Label htmlFor="desctiption">Short Description *</Label>
               <Textarea
