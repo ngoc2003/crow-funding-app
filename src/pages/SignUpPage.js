@@ -13,11 +13,19 @@ import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 import FormGroup from "../components/common/FormGroup";
 import Button from "../components/common/Button";
-
+import { useDispatch } from "react-redux";
+import { signUp } from "../store/auth/auth-slice";
 export default function SignUpPage() {
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
     useToggleValue(false);
-
+  const dispatch = useDispatch();
+  const handleSignUp = async (values) => {
+    try {
+       dispatch(signUp(values));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const infos = [
     {
       name: "name",
@@ -53,7 +61,7 @@ export default function SignUpPage() {
         term: Yup.bool().oneOf([true], "Accept Terms is required!"),
       })}
       onSubmit={(values) => {
-        console.log("Submit: ", values);
+        handleSignUp(values);
       }}
     >
       {({ errors, touched, handleSubmit, isSubmitting, setFieldValue }) => (
