@@ -1,7 +1,10 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CampaignView from "./modules/campaign/parts/CampaignView";
 import Modal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshToken, updateUser } from "./store/auth/auth-slice";
+import { getToken, logOut } from "./utils/auth";
 
 const customStyles = {
   content: {
@@ -15,19 +18,40 @@ const customStyles = {
 };
 Modal.setAppElement("#root");
 Modal.defaultStyles = {};
-const CampaignAddNew = lazy(() =>
-  import("./modules/campaign/parts/CampaignAddNew")
-);
-const SignInPage = lazy(() => import("./pages/SignInPage"));
-// import SignUpPage from "./pages/SignUpPage";
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const WithdrawPage = lazy(() => import("./pages/WithdrawPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
 const CampaignPage = lazy(() => import("./pages/CampaignPage"));
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
+const StartCampaign = lazy(() => import("./pages/StartCampaign"));
 const ShippingPage = lazy(() => import("./pages/ShippingPage"));
 const LayoutDashboard = lazy(() => import("./layouts/LayoutDashboard"));
 const LayoutPayment = lazy(() => import("./layouts/LayoutPayment"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 function App() {
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user && user.id) {
+      const { access_token } = getToken();
+
+      dispatch(
+        updateUser({
+          user: user,
+          accessToken: access_token,
+        })
+      );
+    } else {
+      const { refresh_token } = getToken();
+      if (refreshToken) {
+        dispatch(refreshToken(refresh_token));
+      } else {
+        dispatch(refreshToken({}));
+        logOut()
+      }
+    }
+  }, []);
   return (
     <Suspense>
       <Routes>
@@ -60,7 +84,17 @@ function App() {
           <Route
             path="/start-campaign"
             exact
-            element={<CampaignAddNew></CampaignAddNew>}
+            element={<StartCampaign></StartCampaign>}
+          ></Route>
+          <Route
+            path="/withdraw"
+            exact
+            element={<WithdrawPage></WithdrawPage>}
+          ></Route>
+          <Route
+            path="/payment"
+            exact
+            element={<PaymentPage></PaymentPage>}
           ></Route>
           <Route
             path="*"
@@ -68,8 +102,8 @@ function App() {
             element={<DashboardPage></DashboardPage>}
           ></Route>
         </Route>
-        <Route element={<LayoutPayment/>}>
-        <Route
+        <Route element={<LayoutPayment />}>
+          <Route
             path="/checkout"
             element={<CheckoutPage></CheckoutPage>}
           ></Route>

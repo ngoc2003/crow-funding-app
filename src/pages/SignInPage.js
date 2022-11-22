@@ -11,11 +11,16 @@ import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 import Button from "../components/common/Button";
+import { useDispatch } from "react-redux";
+import { signIn } from "../store/auth/auth-slice";
 
 export default function SignInPage() {
+  const dispatch = useDispatch();
   const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
     useToggleValue(false);
-
+  const handleSignIn = (values) => {
+    dispatch(signIn(values));
+  };
   const infos = [
     {
       name: "email",
@@ -31,7 +36,7 @@ export default function SignInPage() {
   ];
   return (
     <Formik
-      initialValues={{ name: "", email: "", password: "" }}
+      initialValues={{ email: "", password: "" }}
       validationSchema={Yup.object({
         email: Yup.string()
           .email("Invalid email address")
@@ -41,7 +46,7 @@ export default function SignInPage() {
           .min(8, "Password must at least 8 char"),
       })}
       onSubmit={(values) => {
-        console.log("Submit: ", values);
+        handleSignIn(values);
       }}
     >
       {({ errors, touched, setFieldValue }) => (
@@ -74,8 +79,8 @@ export default function SignInPage() {
                 </FormGroup>
               );
             })}
-            <Button fluid primary type='submit'>
-              Create my account
+            <Button fluid primary type="submit">
+              Sign In
             </Button>
           </Form>
         </LayoutAuthen>

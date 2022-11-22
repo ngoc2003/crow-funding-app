@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Gap from "../../components/common/Gap";
 import IconCampaign from "../../components/icons/IconCampaign";
@@ -9,43 +10,49 @@ import IconPayment from "../../components/icons/IconPayment";
 import IconProfile from "../../components/icons/IconProfile";
 import IconWithdraw from "../../components/icons/IconWithdraw";
 import logo from "../../images/Logo.png";
+import { logOut } from "../../utils/auth";
 
-const sidebarLinks = [
-  {
-    icon: <IconDashBoard />,
-    name: "Dashboard",
-    url: "/",
-  },
-  {
-    icon: <IconCampaign />,
-    name: "Campaign",
-    url: "/campaign",
-  },
-  {
-    icon: <IconPayment />,
-    name: "Payment",
-    url: "/payment",
-  },
-  {
-    icon: <IconWithdraw></IconWithdraw>,
-    name: "Withdraw",
-    url: "/withdraw",
-  },
-  {
-    icon: <IconProfile />,
-    name: "Profile",
-    url: "/profile",
-  },
-  {
-    icon: <IconLogout />,
-    name: "Logout",
-  },
-  {
-    icon: <IconDarkMode />,
-    name: "Light/ Dark",
-  },
-];
+
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const sidebarLinks = [
+    {
+      icon: <IconDashBoard />,
+      name: "Dashboard",
+      url: "/",
+    },
+    {
+      icon: <IconCampaign />,
+      name: "Campaign",
+      url: "/campaign",
+    },
+    {
+      icon: <IconPayment />,
+      name: "Payment",
+      url: "/payment",
+    },
+    {
+      icon: <IconWithdraw></IconWithdraw>,
+      name: "Withdraw",
+      url: "/withdraw",
+    },
+    {
+      icon: <IconProfile />,
+      name: "Profile",
+      url: "/profile",
+    },
+    {
+      icon: <IconLogout />,
+      name: "Logout",
+      onClick: () => {
+        dispatch(logOut());
+      },
+    },
+    {
+      icon: <IconDarkMode />,
+      name: "Light/ Dark",
+    },
+  ];
   return (
     //     <div>
     // <div className="w-[52px] inline-block"></div>
@@ -72,6 +79,7 @@ const Sidebar = () => {
           ) : (
             <div
               key={item.name}
+              onClick={item.onClick}
               className="duration-300 cursor-pointer hover:bg-white md:rounded-3xl"
             >
               <span>{item.icon}</span>

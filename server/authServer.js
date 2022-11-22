@@ -32,7 +32,7 @@ function updateRefreshToken(name, refreshToken) {
     if (user.name === name) {
       return {
         ...user,
-        refreshToken,
+        refreshToken: refreshToken,
       };
     }
     return user;
@@ -52,6 +52,7 @@ app.post("/auth/sign-in", (req, res) => {
     return user.email === email;
   });
   if (!user) return res.sendStatus(401);
+  //401: un-authorize
   const dbPassword = user.password;
   bcrypt.compare(req.body.password, dbPassword, (err, hash) => {
     if (err || !hash) {
@@ -63,7 +64,6 @@ app.post("/auth/sign-in", (req, res) => {
       });
     }
     const tokens = generateTokens(user);
-
     updateRefreshToken(user.name, tokens.refreshToken);
     res.json(tokens);
   });
