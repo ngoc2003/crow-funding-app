@@ -24,14 +24,14 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center text-white ${
+      className={`py-3 text-base min-h-[56px] font-semibold px-5 rounded-xl inline-flex items-center justify-center  ${
         primary
-          ? "bg-primary"
+          ? "bg-primary text-white"
           : secondary
-          ? "bg-secondary"
+          ? "bg-secondary text-white"
           : third
           ? "bg-white text-secondary"
-          : ""
+          : "bg-[#EEEAFD] text-secondary"
       } ${isLoading && "pointer-events-none opacity-50"} ${
         fluid && "w-full"
       } ${className}`}

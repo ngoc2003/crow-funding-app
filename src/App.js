@@ -25,6 +25,7 @@ const CampaignPage = lazy(() => import("./pages/CampaignPage"));
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 const StartCampaign = lazy(() => import("./pages/StartCampaign"));
 const ShippingPage = lazy(() => import("./pages/ShippingPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const LayoutDashboard = lazy(() => import("./layouts/LayoutDashboard"));
 const LayoutPayment = lazy(() => import("./layouts/LayoutPayment"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
@@ -82,7 +83,7 @@ function App() {
             element={<CampaignView></CampaignView>}
           ></Route>
           <Route
-            path="/start-campaign"
+            path="/new-campaign"
             exact
             element={<StartCampaign></StartCampaign>}
           ></Route>
@@ -95,6 +96,11 @@ function App() {
             path="/payment"
             exact
             element={<PaymentPage></PaymentPage>}
+          ></Route>
+          <Route
+            path="/profile"
+            exact
+            element={<ProfilePage></ProfilePage>}
           ></Route>
           <Route
             path="*"

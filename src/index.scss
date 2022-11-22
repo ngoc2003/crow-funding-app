@@ -52,3 +52,9 @@
 .ql-toolbar {
   @apply bg-text4 bg-opacity-30 text-center;
 }
+.Toastify__toast--success .Toastify__progress-bar--success {
+  @apply bg-primary;
+}
+.Toastify__toast--success svg {
+  @apply fill-primary;
+}

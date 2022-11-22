@@ -1,7 +1,7 @@
 // import { set } from "lodash";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import FormGroup from "../components/common/FormGroup";
 import Input from "../components/input/Input";
@@ -11,16 +11,21 @@ import * as Yup from "yup";
 import IconEyeToggle from "../components/icons";
 import useToggleValue from "../hooks/useToggleValue";
 import Button from "../components/common/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/auth/auth-slice";
 
 export default function SignInPage() {
   const dispatch = useDispatch();
-  const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
-    useToggleValue(false);
+  const navigate = useNavigate()
+  const user = useSelector((state) => state.auth);
   const handleSignIn = (values) => {
     dispatch(signIn(values));
   };
+  useEffect(() => {
+    if (user) {
+      navigate('/')
+    }
+  },[])
   const infos = [
     {
       name: "email",

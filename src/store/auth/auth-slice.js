@@ -9,7 +9,6 @@ const authSlice = createSlice({
     signIn: (state, action) => {
       return {
         ...state,
-        // ...action.payload
       };
     },
     signUp: (state, action) => {

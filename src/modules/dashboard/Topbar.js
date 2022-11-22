@@ -13,7 +13,7 @@ const Topbar = () => {
       </div>
       <div className="flex items-center justify-end flex-1 gap-x-10">
         <Fund></Fund>
-        <Button to="/start-campaign"  secondary >
+        <Button to="/new-campaign"  secondary >
           Start a campaign
         </Button>
         <img src={avatar} alt="" className="rounded-full w-13 h-13" />

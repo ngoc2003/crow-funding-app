@@ -7,13 +7,16 @@ import {
   requestAuthSignUp,
 } from "./auth-requests";
 import { updateUser } from "./auth-slice";
-
+import { toast } from "react-toastify";
 export default function* handleAuthSignUp(action) {
   const { payload } = action;
   try {
     const response = yield call(requestAuthSignUp, payload);
     if (response.status === 201) {
-      console.log("Sign Up Successfully");
+      toast.success("Sign UP Successfully", {
+        pauseOnHover: false,
+        autoClose: 1500,
+      });
     }
   } catch (err) {
     console.log(err);
@@ -26,6 +29,10 @@ function* handleAuthSignIn(action) {
     if (response.data.accessToken && response.data.refreshToken) {
       saveToken(response.data.accessToken, response.data.refreshToken);
       yield call(handleAuthFetchUser, { payload: response.data.accessToken });
+      toast.success("Sign In Successfully", {
+        pauseOnHover: false,
+        autoClose: 1500,
+      });
     }
   } catch (err) {
     console.log(err);
@@ -56,7 +63,7 @@ function* handleAuthRefreshToken({ payload }) {
       saveToken(response.data.accessToken, response.data.refreshToken);
       yield call(handleAuthFetchUser, { payload: response.data.accessToken });
     } else {
-      yield handleAuthLogOut()
+      yield handleAuthLogOut();
     }
   } catch (err) {
     console.log(err);
@@ -64,10 +71,16 @@ function* handleAuthRefreshToken({ payload }) {
 }
 
 function* handleAuthLogOut() {
-  yield put(updateUser({
-    user:undefined,
-    accessToken:null
-  }));
-  logOut()
+  yield put(
+    updateUser({
+      user: undefined,
+      accessToken: null,
+    })
+  );
+  logOut();
+  toast.success("Log Out Successfully", {
+    pauseOnHover: false,
+    autoClose: 1500,
+  });
 }
 export { handleAuthSignIn, handleAuthRefreshToken, handleAuthLogOut };
