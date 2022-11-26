@@ -20,45 +20,50 @@ import { useSelector } from "react-redux";
 Quill.register("modules/imageUploader", ImageUploader);
 const CampaignAddNew = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState("");
   const [image, setImage] = useState("");
-  // const quillRef = useRef();
+  const quillRef = useRef(null);
 
-  // const imageHandler = (e) => {
-  //   const editor = quillRef.current.getEditor();
-  //   console.log(editor);
-  //   const input = document.createElement("input");
-  //   input.setAttribute("type", "file");
-  //   input.setAttribute("accept", "image/*");
-  //   input.click();
+  const imageHandler = (e) => {
+    const editor = quillRef.current.getEditor();
+    console.log(editor);
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
 
-  //   input.onchange = async () => {
-  //     const file = input.files[0];
-  //     if (/^image\//.test(file.type)) {
-  //       console.log(file);
-  //       const formData = new FormData();
-  //       formData.append("image", file);
-  //       const url = async (file) => {
-  //         const bodyFormData = new FormData();
-  //         bodyFormData.append("image", file);
-  //         const response = await axios({
-  //           method: "post",
-  //           url: imgbbAPI,
-  //           data: bodyFormData,
-  //           headers: {
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         });
-  //         return response.data.data.url;
-  //       };
-  //       editor.insertEmbed(editor.getSelection(), "image", url(file));
-  //     }
-  //   };
-  // };
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (/^image\//.test(file.type)) {
+        // const formData = new FormData();
+        // formData.append("image", file);
+
+        const url = async (file) => {
+          const bodyFormData = new FormData();
+          bodyFormData.append("image", file);
+          const response = await axios({
+            method: "POST",
+            url: imgbbAPI,
+            data: bodyFormData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          return response.data.data.url;
+        };
+        url(file).then((ress) => {
+          editor.insertEmbed(
+            quillRef.current.getEditorSelection().index,
+            "image",
+            `${ress}`
+          );
+        });
+      }
+    };
+  };
   useEffect(() => {
     async function fetchCountry() {
       const response = await axios.get(
@@ -136,21 +141,24 @@ const CampaignAddNew = () => {
           [{ color: ["#FFFFFF", "#e60000"] }],
           ["code-block"],
         ],
-        imageUploader: {
-          upload: async (file) => {
-            const bodyFormData = new FormData();
-            console.log("SUCCESS");
-            bodyFormData.append("image", file);
-            const response = await axios({
-              method: "post",
-              url: imgbbAPI,
-              data: bodyFormData,
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
-            return response.data.data.url;
-          },
+        // imageUploader: {
+        //   upload: async (file) => {
+        //     const bodyFormData = new FormData();
+        //     console.log("SUCCESS");
+        //     bodyFormData.append("image", file);
+        //     const response = await axios({
+        //       method: "post",
+        //       url: imgbbAPI,
+        //       data: bodyFormData,
+        //       headers: {
+        //         "Content-Type": "multipart/form-data",
+        //       },
+        //     });
+        //     return response.data.data.url;
+        //   },
+        // },
+        handlers: {
+          image: imageHandler,
         },
       },
     }),
@@ -234,6 +242,7 @@ const CampaignAddNew = () => {
                 {({ field }) => (
                   <div>
                     <ReactQuill
+                      ref={quillRef}
                       theme="snow"
                       modules={modules}
                       value={field.value}

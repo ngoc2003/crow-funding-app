@@ -19,6 +19,12 @@
     svg * {
       @apply stroke-primary;
     }
+
+  }
+  .content-view{
+    img{
+      width:100%;
+    }
   }
 }
 .scroll-hidden {

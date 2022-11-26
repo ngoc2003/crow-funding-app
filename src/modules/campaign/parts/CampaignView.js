@@ -12,6 +12,7 @@ import CampaignPerk from "./CampaignPerk";
 import axios from "axios";
 import { apiURL } from "../../../config/config";
 import { useParams } from "react-router-dom";
+import {Interweave} from 'interweave'
 const CampaignView = () => {
   const {slug} = useParams()
   const [data, setData] = useState({})
@@ -96,9 +97,9 @@ const CampaignView = () => {
       <div className="grid gap-x-10 grid-cols-[1.3fr,1fr]">
         <div>
           <h4 className="mb-5 font-semibold text-black">Story</h4>
-          <div className="bg-white">
-            {data?.story}
-          </div>
+          <Interweave className="bg-white content-view" content={data?.story}>
+            
+          </Interweave>
         </div>
         <div>
           <CampaignSupport></CampaignSupport>
