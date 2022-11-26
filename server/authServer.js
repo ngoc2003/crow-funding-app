@@ -66,6 +66,7 @@ app.post("/auth/sign-in", (req, res) => {
     const tokens = generateTokens(user);
     updateRefreshToken(user.name, tokens.refreshToken);
     res.json(tokens);
+    res.redirect('/')
   });
 });
 
@@ -109,6 +110,8 @@ app.post("/auth/sign-up", (req, res) => {
     });
     fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
     res.sendStatus(201);
+    res.redirect('/')
+
   });
 });
 
@@ -116,6 +119,8 @@ app.delete("/logout", verifyToken, (req, res) => {
   const user = users.find((user) => user.id === req.userId);
   updateRefreshToken(user.name, "");
   res.sendStatus(204);
+  res.redirect('/')
+
 });
 
 app.listen(5000, () => console.log("Server auth started on port 5000"));

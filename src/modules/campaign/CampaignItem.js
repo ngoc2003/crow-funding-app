@@ -10,7 +10,7 @@ const CampaignItem = ({ data = "" }) => {
   return (
     <div className="flex flex-col">
       <CampaignImage
-        to={`/campaigns/${data.id}`}
+        to={`/campaign/${data.id}`}
         image={data?.image}
       ></CampaignImage>
       <div className="flex flex-col flex-1 px-4 py-3">

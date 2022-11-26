@@ -18,11 +18,11 @@ console.log(database);
 app.get("/api/campaigns", (req, res) => {
   res.json(database.campaigns);
 });
-// app.get("/api/campaigns/:slug", (req, res) => {
-//   database.campaigns
-//     .findOne({ slug: req.params.slug })
-//     .lean()
-//     .then((item) => res.json(item));
-// });
+app.get("/api/campaigns/:slug", (req, res) => {
+  database.campaigns
+    .findOne({ slug: req.params.slug })
+    .lean()
+    .then((item) => res.json(item));
+});
 
 app.listen(4001, () => console.log("Server started on port 4001"));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import CampaignCategorize from "./CampaignCategorize";
 import CampaignDesc from "./CampaignDesc";
@@ -9,18 +9,30 @@ import CampAuthorView from "./CampAuthorView";
 import Button from "../../../components/common/Button";
 import CampaignSupport from "./CampaignSupport";
 import CampaignPerk from "./CampaignPerk";
+import axios from "axios";
+import { apiURL } from "../../../config/config";
+import { useParams } from "react-router-dom";
 const CampaignView = () => {
+  const {slug} = useParams()
+  const [data, setData] = useState({})
+  useEffect(() =>{
+    const fetchData = async () => {
+      const response = await axios.get(`${apiURL}/campaigns/${slug}`)
+      setData(response.data)
+    }
+    fetchData()
+  }, [])
   return (
     <>
       <div
-        className="h-[140px] mb-8 rounded-3xl bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        className="h-[140px] mb-8 rounded-3xl bg-cover bg-center bg-no-repeat flex items-center justify-center bg-opacity-70"
         style={{ background: `url(https://source.unsplash.com/random)` }}
       >
-        <h1 className="text-3xl font-bold text-white">Education</h1>
+        <h1 className="text-3xl font-bold text-white">{data?.category}</h1>
       </div>
       <div className="flex items-center gap-x-10 w-full max-w-[1066px]">
         <div className="flex-1">
-          <CampaignImage className={`h-[398px] mb-8 `}></CampaignImage>
+          <CampaignImage image={data?.image} className={`h-[398px] mb-8 `}></CampaignImage>
           <div className="flex items-center justify-center gap-x-5">
             {Array(4)
               .fill()
@@ -40,11 +52,10 @@ const CampaignView = () => {
             className="mb-4 text-sm"
           ></CampaignCategorize>
           <CampaignTitle className={`font-bold text-xl mb-4`}>
-            Remake - We make architecture exhibition
+            {data?.title}
           </CampaignTitle>
           <CampaignDesc className="mb-6 text-sm">
-            Remake - We Make: an exhibition about architecture's social agency
-            in the face of urbanisation
+            {data?.description}
           </CampaignDesc>
           <CampAuthorView></CampAuthorView>
           <div className="w-full rounded-full bg-[#EFEFEF]  h-[5px] mb-6">
@@ -86,11 +97,7 @@ const CampaignView = () => {
         <div>
           <h4 className="mb-5 font-semibold text-black">Story</h4>
           <div className="bg-white">
-            {/* 
-            
-            Code here
-            
-             */}
+            {data?.story}
           </div>
         </div>
         <div>
