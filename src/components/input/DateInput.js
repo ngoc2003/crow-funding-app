@@ -6,7 +6,7 @@ const DateInput = ({ onChange = () => {}, className }) => {
     <div
       className={`overflow-hodden items-center flex border rounded-xl overflow-hidden hover:border-blue-400 dark:text-white text-sm   text-text1  duration-200 ${className}`}
     >
-      <DatePicker format={'DD-MM-YYYY'} onChange={onChange}></DatePicker>
+      <DatePicker format={'DD/MM/YYYY'} onChange={onChange}></DatePicker>
     </div>
   );
 };

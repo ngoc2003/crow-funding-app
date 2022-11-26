@@ -2,8 +2,8 @@ import React from "react";
 
 const CampaignMeta = ({
   size = "small",
-  amount = "",
-  price = "",
+  amount = 100,
+  price = 100,
   text = "Raised of $1,900",
 }) => {
   return (

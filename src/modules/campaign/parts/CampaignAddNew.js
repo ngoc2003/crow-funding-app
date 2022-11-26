@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ReactQuill, { Quill } from "react-quill";
@@ -13,16 +13,52 @@ import * as axios from "axios";
 import Button from "../../../components/common/Button";
 import DropdownInput from "../../../components/dropdown/DropdownInput";
 import { toast } from "react-toastify";
-// Quill.register("modules/imageUploader", ImageUploader);
 import DateInput from "../../../components/input/DateInput";
 import { apiURL, imgbbAPI } from "../../../config/config";
 import ImageUpload from "../../../components/image/ImageUpload";
+import { useSelector } from "react-redux";
+Quill.register("modules/imageUploader", ImageUploader);
 const CampaignAddNew = () => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const [category, setCategory] = useState("");
   const [method, setMethod] = useState("");
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState("");
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState("");
+  // const quillRef = useRef();
+
+  // const imageHandler = (e) => {
+  //   const editor = quillRef.current.getEditor();
+  //   console.log(editor);
+  //   const input = document.createElement("input");
+  //   input.setAttribute("type", "file");
+  //   input.setAttribute("accept", "image/*");
+  //   input.click();
+
+  //   input.onchange = async () => {
+  //     const file = input.files[0];
+  //     if (/^image\//.test(file.type)) {
+  //       console.log(file);
+  //       const formData = new FormData();
+  //       formData.append("image", file);
+  //       const url = async (file) => {
+  //         const bodyFormData = new FormData();
+  //         bodyFormData.append("image", file);
+  //         const response = await axios({
+  //           method: "post",
+  //           url: imgbbAPI,
+  //           data: bodyFormData,
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         });
+  //         return response.data.data.url;
+  //       };
+  //       editor.insertEmbed(editor.getSelection(), "image", url(file));
+  //     }
+  //   };
+  // };
   useEffect(() => {
     async function fetchCountry() {
       const response = await axios.get(
@@ -103,6 +139,7 @@ const CampaignAddNew = () => {
         imageUploader: {
           upload: async (file) => {
             const bodyFormData = new FormData();
+            console.log("SUCCESS");
             bodyFormData.append("image", file);
             const response = await axios({
               method: "post",
@@ -122,15 +159,15 @@ const CampaignAddNew = () => {
 
   const handleAddNewCampaign = async (values) => {
     try {
-      console.log(values)
       await axios.post(`${apiURL}/campaigns`, {
         ...values,
         category: category,
         endMethod: method,
         country: country,
         image: image,
+        author: user.name,
       });
-      // toast.success("ADD SUCCESSFULLY");
+      toast.success("ADD SUCCESSFULLY");
     } catch (error) {
       console.log(error);
     }
@@ -140,22 +177,15 @@ const CampaignAddNew = () => {
       initialValues={{
         title: "",
         description: "",
-        // category: category,
         story: "",
         goal: "",
         raisedAmount: "",
         amountPrefilled: "",
         video: "",
-        // endMethod: method,
-        // country: country,
         startDate: "",
         endDate: "",
       }}
-      validationSchema={Yup.object({
-        // title: Yup.string().required("Vui Lòng Điền Trường Này"),
-        // story: Yup.string().required("Vui Lòng Điền Trường Này"),
-        // description: Yup.string().required("Vui Lòng Điền Trường Này"),
-      })}
+      validationSchema={Yup.object({})}
       onSubmit={(values) => {
         handleAddNewCampaign(values);
       }}
@@ -180,13 +210,12 @@ const CampaignAddNew = () => {
                   setItem={setCategory}
                   data={categories}
                   item={category}
-                  // name="category"
                 ></DropdownInput>
               </FormGroup>
             </div>
             <FormGroup>
               <Label htmlFor="image"></Label>
-              <ImageUpload onChange={setImage} name='Name'></ImageUpload>
+              <ImageUpload onChange={setImage} name="Name"></ImageUpload>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="desctiption">Short Description *</Label>
@@ -203,14 +232,16 @@ const CampaignAddNew = () => {
               <Label htmlFor="story">Story *</Label>
               <Field name="story">
                 {({ field }) => (
-                  <ReactQuill
-                    theme="snow"
-                    modules={modules}
-                    value={field.value}
-                    onChange={field.onChange(field.name)}
-                    placeholder="Write your story"
-                    className="border outline-none hover:border-blue-400 durration-200"
-                  />
+                  <div>
+                    <ReactQuill
+                      theme="snow"
+                      modules={modules}
+                      value={field.value}
+                      onChange={field.onChange(field.name)}
+                      placeholder="Write your story"
+                      className="border outline-none hover:border-blue-400 durration-200"
+                    />
+                  </div>
                 )}
               </Field>
             </FormGroup>

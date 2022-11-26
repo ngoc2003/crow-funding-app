@@ -78,9 +78,5 @@ function* handleAuthLogOut() {
     })
   );
   logOut();
-  toast.success("Log Out Successfully", {
-    pauseOnHover: false,
-    autoClose: 1500,
-  });
 }
 export { handleAuthSignIn, handleAuthRefreshToken, handleAuthLogOut };

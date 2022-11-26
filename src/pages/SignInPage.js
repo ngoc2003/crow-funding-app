@@ -16,16 +16,9 @@ import { signIn } from "../store/auth/auth-slice";
 
 export default function SignInPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const user = useSelector((state) => state.auth);
   const handleSignIn = (values) => {
     dispatch(signIn(values));
   };
-  useEffect(() => {
-    if (user) {
-      navigate('/')
-    }
-  },[])
   const infos = [
     {
       name: "email",
@@ -84,7 +77,7 @@ export default function SignInPage() {
                 </FormGroup>
               );
             })}
-            <Button fluid primary type="submit">
+            <Button fluid primary type="submit" >
               Sign In
             </Button>
           </Form>

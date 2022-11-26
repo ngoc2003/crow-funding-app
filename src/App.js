@@ -36,7 +36,6 @@ function App() {
   useEffect(() => {
     if (user && user.id) {
       const { access_token } = getToken();
-
       dispatch(
         updateUser({
           user: user,
@@ -49,10 +48,14 @@ function App() {
         dispatch(refreshToken(refresh_token));
       } else {
         dispatch(refreshToken({}));
-        logOut()
+        logOut();
       }
     }
   }, []);
+
+  if(user) {
+    console.log("User")
+  }
   return (
     <Suspense>
       <Routes>

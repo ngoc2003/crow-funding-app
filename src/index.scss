@@ -46,6 +46,12 @@
   max-height: 150px !important;
   overflow-y: auto;
 }
+.ant-menu-item-active .ant-menu-title-content {
+  @apply text-primary;
+}
+.ant-menu {
+  border: none;
+}
 .ql-editor {
   min-height: 200px;
 }
