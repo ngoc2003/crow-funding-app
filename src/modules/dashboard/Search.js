@@ -1,23 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import IconClose from "../../components/icons/IconClose";
+import { useDebounce } from "../../hooks/useDebounce";
+import axios from "axios";
+import { apiURL } from "../../config/config";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
 const Search = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const searchValueDebounce = useDebounce(searchValue);
+  function handleSearch(e) {
+    setSearchValue(e.target.value);
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchValueDebounce) {
+        const response = await axios.get(`${apiURL}/search`);
+        console.log(response);
+      }
+    };
+    fetchData();
+  }, [searchValueDebounce]);
   return (
     <>
       {showSearch && (
-        <div className="fixed inset-0 z-10 bg-black bg-opacity-50 overlay" onClick={() => setShowSearch(false)}></div>
+        <div
+          className="fixed inset-0 z-10 bg-black bg-opacity-50 overlay"
+          onClick={() => setShowSearch(false)}
+        ></div>
       )}
       <div className="relative z-50 flex-1">
         <div className=" flex items-center p-2 bg-white rounded-full shadow-lg w-full max-w-[458px] dark:bg-darkSecondary">
           <div className="flex-1 pl-4 pr-5">
             <input
-              className="w-full text-sm bg-transparent focus:outline-none text-text1 placeholder:text-text4"
+              defaultValue={""}
+              value={searchValue}
+              className="w-full text-sm bg-transparent focus:outline-none dark:text-white text-text1 placeholder:text-text4"
               type="text"
               placeholder="Do fundrise now"
               onClick={() => setShowSearch(true)}
+              onChange={handleSearch}
             />
           </div>
           <button className="flex-shrink-0 w-[72px] h-10 flex items-center justify-center rounded-full text-white bg-primary">
@@ -44,7 +67,10 @@ const Search = () => {
                 <span className="text-sm font-medium underline">
                   See all 10,124 fundraisier
                 </span>
-                <button className="flex items-center justify-center w-16 h-12 rounded-xl bg-error bg-opacity-20 text-error" onClick={() => setShowSearch(false)}>
+                <button
+                  className="flex items-center justify-center w-16 h-12 rounded-xl bg-error bg-opacity-20 text-error"
+                  onClick={() => setShowSearch(false)}
+                >
                   <IconClose></IconClose>
                 </button>
               </div>
@@ -55,7 +81,9 @@ const Search = () => {
                   <SearchResultItem></SearchResultItem>
                   <SearchResultItem></SearchResultItem>
                 </div>
-                <h3 className="mb-3 text-sm font-semibold dark:text-white">Related search</h3>
+                <h3 className="mb-3 text-sm font-semibold dark:text-white">
+                  Related search
+                </h3>
                 <div className="flex flex-col text-sm gap-y-3 text-text2">
                   <p>
                     <strong>education</strong> fund
