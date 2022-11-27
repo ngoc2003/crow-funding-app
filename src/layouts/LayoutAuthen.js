@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withErrorBoundary } from "react-error-boundary";
 import Error from "../components/common/Error";
+import useDarkMode from "../hooks/useDarkMode";
 
 const LayoutAuthen = (props) => {
   const { children, heading = "" } = props;
+  const [darkMode, setDarkMode] = useDarkMode()
+  console.log(darkMode)
   return (
     <div className="relative w-full min-h-screen p-10 bg-lite dark:bg-darkbg isolate">
       <img

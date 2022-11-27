@@ -20,10 +20,12 @@ import { useSelector } from "react-redux";
 Quill.register("modules/imageUploader", ImageUploader);
 const CampaignAddNew = () => {
   const { user } = useSelector((state) => state.auth);
-  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState(""); // get list
+  const [category, setCategory] = useState(""); // for current capaign
+  const [methods, setMethods] = useState(""); // get list
   const [method, setMethod] = useState("");
-  const [country, setCountry] = useState("");
   const [countries, setCountries] = useState("");
+  const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
   const quillRef = useRef(null);
 
@@ -34,13 +36,9 @@ const CampaignAddNew = () => {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
-
     input.onchange = async () => {
       const file = input.files[0];
       if (/^image\//.test(file.type)) {
-        // const formData = new FormData();
-        // formData.append("image", file);
-
         const url = async (file) => {
           const bodyFormData = new FormData();
           bodyFormData.append("image", file);
@@ -75,60 +73,26 @@ const CampaignAddNew = () => {
         })
       );
     }
+    async function fetchCategories() {
+      const response = await axios.get(`${apiURL}/categories`);
+      setCategories(
+        response.data.map((item) => {
+          return { label: item, key: item };
+        })
+      );
+    }
+    async function fetchMethods() {
+      const response = await axios.get(`${apiURL}/methods`);
+      setMethods(
+        response.data.map((item) => {
+          return { label: item, key: item };
+        })
+      );
+    }
+    fetchMethods()
     fetchCountry();
+    fetchCategories();
   }, []);
-  const categories = [
-    {
-      label: "Architecture",
-      key: "Architecture",
-    },
-    {
-      label: "Film",
-      key: "Film",
-    },
-    {
-      label: "Home",
-      key: "Home",
-    },
-    {
-      label: "Education",
-      key: "Education",
-    },
-    {
-      label: "Camera",
-      key: "Camera",
-    },
-    {
-      label: "Food",
-      key: "Food",
-    },
-    {
-      label: "Comics",
-      key: "Comics",
-    },
-    {
-      label: "Clothes",
-      key: "Clothes",
-    },
-    {
-      label: "Real Estate",
-      key: "Real Estate",
-    },
-  ];
-  const methods = [
-    {
-      label: "Method 1",
-      key: "Method 1",
-    },
-    {
-      label: "Method 2",
-      key: "Method 2",
-    },
-    {
-      label: "Method 3",
-      key: "Method 3",
-    },
-  ];
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -141,22 +105,6 @@ const CampaignAddNew = () => {
           [{ color: ["#FFFFFF", "#e60000"] }],
           ["code-block"],
         ],
-        // imageUploader: {
-        //   upload: async (file) => {
-        //     const bodyFormData = new FormData();
-        //     console.log("SUCCESS");
-        //     bodyFormData.append("image", file);
-        //     const response = await axios({
-        //       method: "post",
-        //       url: imgbbAPI,
-        //       data: bodyFormData,
-        //       headers: {
-        //         "Content-Type": "multipart/form-data",
-        //       },
-        //     });
-        //     return response.data.data.url;
-        //   },
-        // },
         handlers: {
           image: imageHandler,
         },

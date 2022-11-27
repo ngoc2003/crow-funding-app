@@ -16,7 +16,7 @@ export default function Input({ children, icon = false, ...props }) {
   return (
     <>
       <div
-        className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400 dark:text-white px-3   text-text1  duration-200 ${
+        className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400 dark:text-white    text-text1  duration-200 ${
           error.length > 0
             ? "border-error"
             : "border-stroke dark:border-darkStroke"
@@ -25,7 +25,7 @@ export default function Input({ children, icon = false, ...props }) {
         <input
           type={!showPassword && icon ? "password" : "text"}
           placeholder={placeholder}
-          className={`outline-none   bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    `}
+          className={`outline-none  px-3  bg-transparent w-full py-4  font-medium text-sm dark:placeholder:text-text2 placeholder:text-text4    `}
           {...rest}
         />
         {icon && (

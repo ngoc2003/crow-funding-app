@@ -25,6 +25,9 @@
     img{
       width:100%;
     }
+    p{
+      margin:20px 0;
+    }
   }
 }
 .scroll-hidden {
@@ -36,6 +39,7 @@
 }
 
 .ReactModal__Body--open {
+  max-height: 100vh;
   overflow: hidden;
 }
 .ant-picker {

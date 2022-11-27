@@ -2,7 +2,7 @@ import React from "react";
 
 const Fund = () => {
   return (
-    <div className="flex items-center justify-center text-base font-medium cursor-pointer gap-x-2 text-text2">
+    <div className="flex items-center justify-center text-base font-medium cursor-pointer gap-x-2 text-text2 dark:text-text3">
       <span className="">
         <svg
           xmlns="http://www.w3.org/2000/svg"

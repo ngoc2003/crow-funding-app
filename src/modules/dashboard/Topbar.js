@@ -10,14 +10,13 @@ import { Menu } from "antd";
 const Topbar = () => {
   const { user } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
-  console.log(user);
   const handleMenuClick = (e) => {
     setShowMenu(!showMenu);
   };
   const Info = () => {
     if (!user)
       return (
-        <div className="flex items-center justify-center p-3 text-sm border rounded-md shadow-inner whitespace-nowrap">
+        <div className="flex items-center justify-center p-3 text-sm rounded-md whitespace-nowrap">
           You need to{" "}
           <a href="/sign-in" className="mx-1 text-primary">
             Sign in
@@ -27,10 +26,11 @@ const Topbar = () => {
       );
     return (
       <>
-        <div className="flex items-center justify-center p-3 text-sm border rounded-md shadow-inner whitespace-nowrap">
+        <div className="flex items-center justify-center p-3 text-sm rounded-md whitespace-nowrap">
           Hello <span className="ml-1 text-primary">{user.name}</span>
         </div>
-        <Menu items={menu} onClick={() => setShowMenu(false)}></Menu>
+        <div className="border-b dark:border-b-darkbg"></div>
+        <Menu items={menu} className='dark:bg-transparent dark:text-white' onClick={() => setShowMenu(false)}></Menu>
       </>
     );
   };
@@ -52,7 +52,7 @@ const Topbar = () => {
   return (
     <div className="flex items-center justify-between mb-8 ">
       <div className="flex items-center flex-1 gap-x-10">
-        <Search></Search>
+        <Search ></Search>
       </div>
       <div className="flex items-center justify-end flex-1 gap-x-10">
         <Fund></Fund>
@@ -67,7 +67,7 @@ const Topbar = () => {
             <img src={avatar} alt="" className="object-cover w-full" />
           </div>
           {showMenu && (
-            <div className="absolute right-0 z-10 p-3 mt-3 bg-white shadow-md top-full">
+            <div className="absolute right-0 z-10 p-3 mt-3 bg-white rounded-md shadow-md shadow-darkSoft dark:bg-darkSecondary dark:text-white top-full">
               <Info></Info>
             </div>
           )}

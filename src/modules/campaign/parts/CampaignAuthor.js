@@ -6,7 +6,7 @@ const CampaignAuthor = ({image = defaultImage, author = 'Anonymous'}) => {
     <div className="flex items-center gap-x-2">
       <img className="object-cover w-8 h-8 rounded-full" src={defaultImage} alt="" />
       <p className="text-xs text-text3">
-        By <span className="font-semibold text-text2">{author}</span>
+        By <span className="font-semibold text-text2 dark:text-text4">{author}</span>
       </p>
     </div>
   );

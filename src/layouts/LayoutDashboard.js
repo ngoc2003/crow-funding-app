@@ -10,7 +10,7 @@ import Button from "../components/common/Button";
 import CampaignPerk from '../modules/campaign/parts/CampaignPerk'
 const LayoutDashboard = () => {
   return (
-    <div className="flex min-h-screen p-10 bg-lite gap-x-10">
+    <div className="flex min-h-screen p-10 bg-lite dark:bg-darkbg gap-x-10">
       <ReactModal
         isOpen = {false}
         overlayClassName={
@@ -34,7 +34,6 @@ const LayoutDashboard = () => {
         </>
 
       </ReactModal>
-      {/* <Overlay></Overlay> */}
       <Sidebar></Sidebar>
       <div className="flex-1">
         <Topbar></Topbar>
