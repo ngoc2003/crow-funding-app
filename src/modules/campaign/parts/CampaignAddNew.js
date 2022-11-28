@@ -31,7 +31,6 @@ const CampaignAddNew = () => {
 
   const imageHandler = (e) => {
     const editor = quillRef.current.getEditor();
-    console.log(editor);
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
@@ -74,7 +73,7 @@ const CampaignAddNew = () => {
       );
     }
     async function fetchCategories() {
-      const response = await axios.get(`${apiURL}/categories`);
+      const response = await axios.get(`${apiURL}/api/categories`);
       setCategories(
         response.data.map((item) => {
           return { label: item, key: item };
@@ -82,7 +81,7 @@ const CampaignAddNew = () => {
       );
     }
     async function fetchMethods() {
-      const response = await axios.get(`${apiURL}/methods`);
+      const response = await axios.get(`${apiURL}/api/methods`);
       setMethods(
         response.data.map((item) => {
           return { label: item, key: item };
@@ -115,7 +114,7 @@ const CampaignAddNew = () => {
 
   const handleAddNewCampaign = async (values) => {
     try {
-      await axios.post(`${apiURL}/campaigns`, {
+      await axios.post(`${apiURL}/api/campaigns`, {
         ...values,
         category: category,
         endMethod: method,

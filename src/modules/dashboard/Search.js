@@ -4,9 +4,12 @@ import IconClose from "../../components/icons/IconClose";
 import { useDebounce } from "../../hooks/useDebounce";
 import axios from "axios";
 import { apiURL } from "../../config/config";
+import { v4 } from "uuid";
+import { Link, useNavigate } from "react-router-dom";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
 const Search = () => {
+  const [data, setData] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchValueDebounce = useDebounce(searchValue);
@@ -16,8 +19,10 @@ const Search = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (searchValueDebounce) {
-        const response = await axios.get(`${apiURL}/search`);
-        console.log(response);
+        const response = await axios.get(`${apiURL}/search`, {
+          params: { value: searchValueDebounce },
+        });
+        setData(response.data);
       }
     };
     fetchData();
@@ -65,7 +70,7 @@ const Search = () => {
             <div className="pb-6   overflow-hidden search-results lg:w-[843px] md:w-[200%] bg-white dark:bg-darkSecondary top-full absolute left-0 z-50 translate-y-5 rounded-[20px] dark:text-white">
               <div className="flex items-center justify-between p-3 px-5 bg-graySoft dark:bg-darkSoft">
                 <span className="text-sm font-medium underline">
-                  See all 10,124 fundraisier
+                  See all {data.length} fundraisier
                 </span>
                 <button
                   className="flex items-center justify-center w-16 h-12 rounded-xl bg-error bg-opacity-20 text-error"
@@ -76,12 +81,16 @@ const Search = () => {
               </div>
               <div className="px-10 pt-5">
                 <div className="flex flex-col mb-6 gap-y-5">
-                  <SearchResultItem></SearchResultItem>
-                  <SearchResultItem></SearchResultItem>
-                  <SearchResultItem></SearchResultItem>
-                  <SearchResultItem></SearchResultItem>
+                  {data.length ?
+                    data.map((item) => (
+                      <SearchResultItem
+                        data={item}
+                        key={v4()}
+                        onClick={(e) => {setShowSearch(false)}}
+                      ></SearchResultItem>
+                    )) : <span>No result is founded</span>}
                 </div>
-                <h3 className="mb-3 text-sm font-semibold dark:text-white">
+                {/* <h3 className="mb-3 text-sm font-semibold dark:text-white">
                   Related search
                 </h3>
                 <div className="flex flex-col text-sm gap-y-3 text-text2">
@@ -89,7 +98,7 @@ const Search = () => {
                     <strong>education</strong> fund
                   </p>
                   <p>schoolarship fund</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </>
@@ -99,21 +108,21 @@ const Search = () => {
   );
 };
 
-function SearchResultItem() {
+function SearchResultItem({data, onClick=() => {}, ...props}) {
   return (
-    <div className="flex items-center gap-x-5">
+    <a href={`/campaign/${data.id}`} onClick={onClick} className="flex items-center gap-x-5" {...props} >
       <img
-        src={defaultImage}
+        src={data.image || defaultImage}
         className="object-cover w-12 h-12 rounded-lg"
         alt=""
       />
       <div className="flex-1 text-sm">
         <h3 className="mb-1 dark:text-white">
-          Education fund for Durgham Family
+          {data.title}
         </h3>
-        <p className="text-text3 ">By Durgham Family</p>
+        <p className="text-text3 ">By {data.author}</p>
       </div>
-    </div>
+    </a>
   );
 }
 

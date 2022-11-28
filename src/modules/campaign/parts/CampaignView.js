@@ -13,12 +13,14 @@ import axios from "axios";
 import { apiURL } from "../../../config/config";
 import { useParams } from "react-router-dom";
 import {Interweave} from 'interweave'
+const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
+
 const CampaignView = () => {
   const {slug} = useParams()
   const [data, setData] = useState({})
   useEffect(() =>{
     const fetchData = async () => {
-      const response = await axios.get(`${apiURL}/campaigns/${slug}`)
+      const response = await axios.get(`${apiURL}/api/campaigns/${slug}`)
       setData(response.data)
     }
     fetchData()
@@ -27,19 +29,19 @@ const CampaignView = () => {
     <>
       <div
         className="h-[140px] mb-8 rounded-3xl bg-cover bg-center bg-no-repeat flex items-center justify-center bg-opacity-70"
-        style={{ background: `url(https://source.unsplash.com/random)` }}
+        style={{ background: `url(${defaultImage})` }}
       >
         <h1 className="text-3xl font-bold text-white">{data?.category}</h1>
       </div>
       <div className="flex items-center gap-x-10 w-full max-w-[1066px]">
         <div className="flex-1">
-          <CampaignImage image={data?.image} className={`h-[398px] mb-8 `}></CampaignImage>
-          <div className="flex items-center justify-center gap-x-5">
+          <CampaignImage image={data?.image} className={`h-[398px] `}></CampaignImage>
+          <div className="flex items-center justify-center mt-5 gap-x-5">
             {Array(4)
               .fill()
               .map((item) => (
                 <img
-                  src="https://source.unsplash.com/random"
+                  src={defaultImage}
                   alt=""
                   className="w-[90px] h-[70px] object-cover rounded-lg"
                   key={v4()}
@@ -58,7 +60,7 @@ const CampaignView = () => {
           <CampaignDesc className="mb-6 text-sm">
             {data?.description}
           </CampaignDesc>
-          <CampAuthorView></CampAuthorView>
+          <CampAuthorView image={data?.image} author={data?.author}></CampAuthorView>
           <div className="w-full rounded-full bg-[#EFEFEF]  h-[5px] mb-6">
             <div className="w-2/4 h-full rounded-full bg-primary"></div>
           </div>

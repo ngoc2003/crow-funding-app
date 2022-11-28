@@ -2,12 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
-  "proxy": "http://localhost:3009",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "startAuth": "nodemon authServer.js",
-    "startServer": "nodemon index.js"
+    "start": "nodemon index.js",
+    "startAuth": "nodemon authServer.js"
   },
   "keywords": [],
   "author": "",
