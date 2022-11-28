@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Gap from "../../components/common/Gap";
@@ -18,7 +18,7 @@ import { logOut } from "../../utils/auth";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useDarkMode();
-  console.log(darkMode)
+  const [scroll, setScroll] = useState(0)
   const sidebarLinks = [
     {
       icon: <IconDashBoard />,
@@ -61,8 +61,6 @@ const Sidebar = () => {
     },
   ];
   return (
-    //     <div>
-    // <div className="w-[52px] inline-block"></div>
     <div className="flex flex-col items-center ">
       <img src={logo} alt="logo" className="" />
       <Gap></Gap>

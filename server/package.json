@@ -8,7 +8,7 @@
     "startAuth": "nodemon authServer.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bui Thuy Ngoc",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",

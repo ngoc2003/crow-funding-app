@@ -61,7 +61,7 @@ const CampaignView = () => {
             {data?.description}
           </CampaignDesc>
           <CampAuthorView image={data?.image} author={data?.author}></CampAuthorView>
-          <div className="w-full rounded-full bg-[#EFEFEF]  h-[5px] mb-6">
+          <div className="w-full rounded-full bg-[#EFEFEF] dark:bg-darkStroke  h-[5px] mb-6">
             <div className="w-2/4 h-full rounded-full bg-primary"></div>
           </div>
           <div className="flex items-start justify-between mb-5 gap-x-5">
@@ -86,7 +86,7 @@ const CampaignView = () => {
           </Button>
         </div>
       </div>
-      <div className="flex items-center justify-between mt-[100px] bg-white p-5 shadow-sm mb-6">
+      <div className="flex items-center justify-between rounded-md mt-[100px] bg-white p-5 shadow-sm mb-6 dark:bg-darkSecondary">
         <div className="flex items-center font-semibold gap-x-14 text-text3">
           <span className="text-secondary">Campaign</span>
           <span>Risks</span>
@@ -97,11 +97,14 @@ const CampaignView = () => {
         <Button primary>Back this project</Button>
       </div>
       <div className="grid gap-x-10 grid-cols-[1.3fr,1fr]">
-        <div>
-          <h4 className="mb-5 font-semibold text-black">Story</h4>
-          <Interweave className="bg-white content-view" content={data?.story}>
+        <div className="">
+          <h4 className="mb-5 font-semibold text-black dark:text-white">Story</h4>
+          <div className="p-5 bg-white rounded-md dark:bg-darkSecondary">
+
+          <Interweave className="content-view dark:text-text4 " content={data?.story}>
             
           </Interweave>
+          </div>
         </div>
         <div>
           <CampaignSupport></CampaignSupport>

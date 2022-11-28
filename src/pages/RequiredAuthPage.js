@@ -10,7 +10,7 @@ const RequiredAuthPage = ({ children }) => {
       <div className="flex-1">
         <img src={errorImage} className="w-full" alt="" />
       </div>
-      <div className="flex-1 text-center">
+      <div className="flex-1 text-center dark:text-graySoft">
         You need to sign in to access this page. <br />
         <Link to="/sign-in" className="text-primary">
           Sign in Here

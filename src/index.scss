@@ -3,7 +3,6 @@
 @tailwind utilities;
 @import "~antd/dist/antd.css";
 @import "react-quill/dist/quill.snow.css";
-
 @layer base {
   body {
     @apply max-w-[1440px] mx-auto font-primary text-base font-normal;
@@ -14,6 +13,7 @@
   }
 }
 
+
 @layer components {
   .iconNav--active {
     svg * {
@@ -22,12 +22,21 @@
 
   }
   .content-view{
-    img{
-      width:100%;
+    li{
+      list-style-type: disc;
+      margin-left:10px;
     }
-    p{
+    img{
+      width:100% !important
+    }
+    // p:not(:has(img)) {
+    //   margin:20px !important;
+    //   color:red;
+    // }
+    & > *{
       margin:20px 0;
     }
+
   }
 }
 .scroll-hidden {
