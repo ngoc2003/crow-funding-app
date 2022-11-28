@@ -17,9 +17,9 @@ export default function* handleAuthSignUp(action) {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      setTimeout( () => {
-        window.location.replace("/")
-      },2000)
+      // setTimeout( () => {
+      //   window.location.replace("/")
+      // },2000)
     }
   } catch (err) {
     console.log(err);
@@ -36,9 +36,9 @@ function* handleAuthSignIn(action) {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      setTimeout( () => {
-        window.location.replace("/")
-      },2000)
+      // setTimeout( () => {
+      //   window.location.replace("/")
+      // },2000)
     }
   } catch (err) {
     console.log(err);
@@ -84,8 +84,8 @@ function* handleAuthLogOut() {
     })
   );
   logOut();
-  setTimeout( () => {
-    window.location.replace("/")
-  },0)
+  // setTimeout( () => {
+  //   window.location.replace("/")
+  // },0)
 }
 export { handleAuthSignIn, handleAuthRefreshToken, handleAuthLogOut };
