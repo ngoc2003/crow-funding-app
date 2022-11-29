@@ -26,7 +26,7 @@ const CampaignAddNew = () => {
   const [method, setMethod] = useState("");
   const [countries, setCountries] = useState("");
   const [country, setCountry] = useState("");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const quillRef = useRef(null);
 
   const imageHandler = (e) => {
@@ -119,7 +119,7 @@ const CampaignAddNew = () => {
         category: category,
         endMethod: method,
         country: country,
-        image: image,
+        // image: image,
         author: user.name,
       });
       toast.success("ADD SUCCESSFULLY");
@@ -168,10 +168,10 @@ const CampaignAddNew = () => {
                 ></DropdownInput>
               </FormGroup>
             </div>
-            <FormGroup>
+            {/* <FormGroup>
               <Label htmlFor="image"></Label>
               <ImageUpload onChange={setImage} name="Name"></ImageUpload>
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
               <Label htmlFor="desctiption">Short Description *</Label>
               <Textarea

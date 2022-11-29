@@ -12,19 +12,29 @@ import CampaignPerk from "./CampaignPerk";
 import axios from "axios";
 import { apiURL } from "../../../config/config";
 import { useParams } from "react-router-dom";
-import {Interweave} from 'interweave'
+import { Interweave } from "interweave";
+import CampaignVideo from "./CampaignVideo";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
 const CampaignView = () => {
-  const {slug} = useParams()
-  const [data, setData] = useState({})
-  useEffect(() =>{
+  const { slug } = useParams();
+  const [data, setData] = useState({});
+  const [imgURL, setImgURL] = useState("");
+  useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${apiURL}/api/campaigns/${slug}`)
-      setData(response.data)
-    }
-    fetchData()
-  }, [])
+      const response = await axios.get(`${apiURL}/api/campaigns/${slug}`);
+      setData(response.data);
+    };
+    fetchData();
+  }, []);
+  function getIMG() {
+    const list = document.querySelectorAll(".content-view img");
+    const imgURLTemp = Array.from(list).map((item) => item.getAttribute("src"));
+    setImgURL(imgURLTemp);
+  }
+  setTimeout(() => {
+    getIMG();
+  }, 200);
   return (
     <>
       <div
@@ -34,18 +44,22 @@ const CampaignView = () => {
         <h1 className="text-3xl font-bold text-white">{data?.category}</h1>
       </div>
       <div className="flex items-center gap-x-10 w-full max-w-[1066px]">
-        <div className="flex-1">
-          <CampaignImage image={data?.image} className={`h-[398px] `}></CampaignImage>
+        <div className="flex flex-col flex-1">
+          <div className="flex-1">
+            <CampaignVideo
+              className="h-[300px]"
+              src={data?.video}
+            ></CampaignVideo>
+          </div>
           <div className="flex items-center justify-center mt-5 gap-x-5">
-            {Array(4)
-              .fill()
-              .map((item) => (
+            {imgURL &&
+              imgURL.map((item) => (
                 <img
-                  src={defaultImage}
+                  src={item}
+                  key={v4()}
                   alt=""
                   className="w-[90px] h-[70px] object-cover rounded-lg"
-                  key={v4()}
-                ></img>
+                />
               ))}
           </div>
         </div>
@@ -60,7 +74,10 @@ const CampaignView = () => {
           <CampaignDesc className="mb-6 text-sm">
             {data?.description}
           </CampaignDesc>
-          <CampAuthorView image={data?.image} author={data?.author}></CampAuthorView>
+          <CampAuthorView
+            image={data?.image}
+            author={data?.author}
+          ></CampAuthorView>
           <div className="w-full rounded-full bg-[#EFEFEF] dark:bg-darkStroke  h-[5px] mb-6">
             <div className="w-2/4 h-full rounded-full bg-primary"></div>
           </div>
@@ -98,12 +115,14 @@ const CampaignView = () => {
       </div>
       <div className="grid gap-x-10 grid-cols-[1.3fr,1fr]">
         <div className="">
-          <h4 className="mb-5 font-semibold text-black dark:text-white">Story</h4>
+          <h4 className="mb-5 font-semibold text-black dark:text-white">
+            Story
+          </h4>
           <div className="p-5 bg-white rounded-md dark:bg-darkSecondary">
-
-          <Interweave className="content-view dark:text-text4 " content={data?.story}>
-            
-          </Interweave>
+            <Interweave
+              className="content-view dark:text-text4 "
+              content={data?.story}
+            ></Interweave>
           </div>
         </div>
         <div>

@@ -6,6 +6,7 @@ import CampaignTitle from "./parts/CampaignTitle";
 import CampaignAuthor from "./parts/CampaignAuthor";
 import CampaignImage from "./parts/CampaignImage";
 import { Link } from "react-router-dom";
+import CampaignVideo from "./parts/CampaignVideo";
 const CampaignItem = ({ data = "" }) => {
   return (
     <div className="flex flex-col dark:bg-darkSecondary rounded-2xl">
@@ -13,9 +14,10 @@ const CampaignItem = ({ data = "" }) => {
         to={`/campaign/${data.id}`}
         image={data?.image}
       ></CampaignImage>
+      {/* <CampaignVideo src={data?.video}></CampaignVideo> */}
       <div className="flex flex-col flex-1 px-4 py-3 ">
         <CampaignCategorize>{data?.category}</CampaignCategorize>
-        <Link to={`/campaigns/${data.id}`}>
+        <Link to={`/campaign/${data.id}`}>
           <CampaignTitle>{data?.title || "Title"}</CampaignTitle>
           <CampaignDesc>{data?.description || "Description"}</CampaignDesc>
         </Link>

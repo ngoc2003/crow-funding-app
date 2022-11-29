@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import CampaignView from "./modules/campaign/parts/CampaignView";
+// import CampaignDetail from "./modules/campaign/parts/CampaignDetail";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken, updateUser } from "./store/auth/auth-slice";
@@ -19,6 +19,7 @@ const customStyles = {
 Modal.setAppElement("#root");
 Modal.defaultStyles = {};
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const CampaignDetail = lazy(() => import("./pages/CampaignDetail"));
 const WithdrawPage = lazy(() => import("./pages/WithdrawPage"));
 const PaymentPage = lazy(() => import("./pages/PaymentPage"));
 const CampaignPage = lazy(() => import("./pages/CampaignPage"));
@@ -83,7 +84,7 @@ function App() {
           <Route
             path="/campaign/:slug"
             exact
-            element={<CampaignView></CampaignView>}
+            element={<CampaignDetail></CampaignDetail>}
           ></Route>
           <Route
             path="/new-campaign"
