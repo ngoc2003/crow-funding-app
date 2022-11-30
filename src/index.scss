@@ -13,30 +13,27 @@
   }
 }
 
-
 @layer components {
   .iconNav--active {
     svg * {
       @apply stroke-primary;
     }
-
   }
-  .content-view{
-    li{
+  .content-view {
+    li {
       list-style-type: disc;
-      margin-left:10px;
+      margin-left: 10px;
     }
-    img{
-      width:100% !important
+    img {
+      width: 100% !important;
     }
     // p:not(:has(img)) {
     //   margin:20px !important;
     //   color:red;
     // }
-    & > *{
-      margin:20px 0;
+    & > * {
+      margin: 20px 0;
     }
-
   }
 }
 .scroll-hidden {
@@ -71,11 +68,20 @@
 .ant-menu {
   border: none;
 }
+.ant-btn {
+  @apply border-strock dark:border-darkStroke;
+  background-color: transparent !important;
+}
+.quill{
+  @apply dark:border-darkStroke dark:text-white 
+}
 .ql-editor {
+  @apply dark:placeholder:text-text3;
   min-height: 200px;
 }
 .ql-toolbar {
-  @apply bg-text4 bg-opacity-30 text-center;
+  @apply bg-text4 bg-opacity-30 text-center dark:bg-darkSecondary ;
+
 }
 .Toastify__toast--success .Toastify__progress-bar--success {
   @apply bg-primary;

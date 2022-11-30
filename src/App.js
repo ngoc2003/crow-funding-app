@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken, updateUser } from "./store/auth/auth-slice";
 import { getToken, logOut } from "./utils/auth";
-
+  
 const customStyles = {
   content: {
     // top: '50%',
