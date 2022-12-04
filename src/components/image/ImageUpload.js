@@ -36,7 +36,7 @@ const ImageUpload = ({ onChange = () => {}, name = "" }) => {
   }, [imagePreview]);
   return (
     <>
-      <Input onChange={handleChange} type="file"></Input>
+      <Input onChange={handleChange} type="file" file></Input>
       {imagePreview && (
         <div className="flex items-center justify-center p-5 border rounded-xl">
           <img

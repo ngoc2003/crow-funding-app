@@ -26,7 +26,7 @@ const CampaignAddNew = () => {
   const [method, setMethod] = useState("");
   const [countries, setCountries] = useState("");
   const [country, setCountry] = useState("");
-  // const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const quillRef = useRef(null);
 
   const imageHandler = (e) => {
@@ -73,22 +73,16 @@ const CampaignAddNew = () => {
       );
     }
     async function fetchCategories() {
-      const response = await axios.get(`${apiURL}/api/categories`);
-      setCategories(
-        response.data.map((item) => {
-          return { label: item, key: item };
-        })
-      );
+      const response = await axios.get(`${apiURL}/category/all`);
+      setCategories(response.data);
     }
     async function fetchMethods() {
-      const response = await axios.get(`${apiURL}/api/methods`);
+      const response = await axios.get(`${apiURL}/api/method/all`);
       setMethods(
-        response.data.map((item) => {
-          return { label: item, key: item };
-        })
+        response.data
       );
     }
-    fetchMethods()
+    fetchMethods();
     fetchCountry();
     fetchCategories();
   }, []);
@@ -114,12 +108,12 @@ const CampaignAddNew = () => {
 
   const handleAddNewCampaign = async (values) => {
     try {
-      await axios.post(`${apiURL}/api/campaigns`, {
+      await axios.post(`${apiURL}/campaigns/create`, {
         ...values,
         category: category,
         endMethod: method,
         country: country,
-        // image: image,
+        image: image,
         author: user.name,
       });
       toast.success("ADD SUCCESSFULLY");
@@ -168,10 +162,10 @@ const CampaignAddNew = () => {
                 ></DropdownInput>
               </FormGroup>
             </div>
-            {/* <FormGroup>
+            <FormGroup>
               <Label htmlFor="image"></Label>
               <ImageUpload onChange={setImage} name="Name"></ImageUpload>
-            </FormGroup> */}
+            </FormGroup>
             <FormGroup>
               <Label htmlFor="desctiption">Short Description *</Label>
               <Textarea

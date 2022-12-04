@@ -2,11 +2,11 @@ import axios from "../../api/axios";
 
 export const requestAuthSignUp = (data) => {
   console.log("requestAuthERegister ~~ ", data);
-  return axios.post("/auth/sign-up", { ...data });
+  return axios.post("/sign-up", { ...data });
 };
 
 export const requestAuthSignIn = (data) => {
-  return axios.post("/auth/sign-in", { ...data });
+  return axios.post("/sign-in", { ...data });
 };
 
 export const requestAuthFetchUser = (token) => {

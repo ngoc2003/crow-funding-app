@@ -73,7 +73,10 @@
   background-color: transparent !important;
 }
 .quill{
-  @apply dark:border-darkStroke dark:text-white 
+  @apply dark:border-darkStroke dark:text-white rounded-xl overflow-hidden
+}
+.ql-toolbar, .ql-container {
+  border-color: transparent !important
 }
 .ql-editor {
   @apply dark:placeholder:text-text3;

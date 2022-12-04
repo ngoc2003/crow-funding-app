@@ -12,7 +12,7 @@ export default function DashboardPage() {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${apiURL}/api/campaigns`);
+      const response = await axios.get(`${apiURL}/campaigns/all`);
       setData(response.data);
     };
     fetchData();

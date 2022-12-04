@@ -35,7 +35,7 @@ function App() {
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (user && user.id) {
+    if (user && user._id) {
       const { access_token } = getToken();
       dispatch(
         updateUser({

@@ -8,7 +8,7 @@ Input.propTypes = {
   error: PropTypes.string,
 };
 
-export default function Input({ children, icon = false, ...props }) {
+export default function Input({ children, icon = false, isFile = false, ...props }) {
   // const [showPassword, setShowPassword] = useState(false);
   const { value: showPassword, handleToggleValue: setShowPassword } =
     useToggleValue(false);
@@ -16,7 +16,7 @@ export default function Input({ children, icon = false, ...props }) {
   return (
     <>
       <div
-        className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400 dark:text-white    text-text1  duration-200 ${
+        className={`items-center flex border rounded-xl overflow-hidden hover:border-blue-400  ${isFile ? 'dark:text-text4' : 'dark:text-white'}   text-text1  duration-200 ${
           error.length > 0
             ? "border-error"
             : "border-stroke dark:border-darkStroke"

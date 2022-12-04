@@ -9,7 +9,7 @@ import CampaignVideo from "./parts/CampaignVideo";
 const CampaignFeatures = ({ data = "", className = "", video = false }) => {
   return (
     <Link
-      to={`/campaign/${data.id}`}
+      to={`/campaign/${data._id}`}
       className={`flex items-center gap-x-[30px] w-full max-w-[1048px] ${className}`}
     >
       {video ? (
@@ -22,7 +22,7 @@ const CampaignFeatures = ({ data = "", className = "", video = false }) => {
       ) : (
         <CampaignImage
           image={data?.image}
-          to={`/campaign/${data?.id}`}
+          to={`/campaign/${data?._id}`}
           className={`h-[266px] flex-1`}
         ></CampaignImage>
       )}

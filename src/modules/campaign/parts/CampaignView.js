@@ -22,7 +22,7 @@ const CampaignView = () => {
   const [imgURL, setImgURL] = useState("");
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${apiURL}/api/campaigns/${slug}`);
+      const response = await axios.get(`${apiURL}/campaigns/${slug}`);
       setData(response.data);
     };
     fetchData();

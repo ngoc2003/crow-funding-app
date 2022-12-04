@@ -110,7 +110,7 @@ const Search = () => {
 
 function SearchResultItem({data, onClick=() => {}, ...props}) {
   return (
-    <a href={`/campaign/${data.id}`} onClick={onClick} className="flex items-center gap-x-5" {...props} >
+    <a href={`/campaign/${data._id}`} onClick={onClick} className="flex items-center gap-x-5" {...props} >
       <img
         src={data.image || defaultImage}
         className="object-cover w-12 h-12 rounded-lg"
