@@ -17,12 +17,17 @@ export default function* handleAuthSignUp(action) {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      // setTimeout( () => {
-      //   window.location.replace("/")
-      // },2000)
+      // setTimeout(() => {
+      //   window.location.replace("/");
+      // }, 2000);
     }
   } catch (err) {
-    console.log(err);
+    if (err.response.status === 409) {
+      toast.error("Your email has already existed!", {
+        pauseOnHover: false,
+        autoClose: 1500,
+      });
+    }
   }
 }
 
@@ -32,22 +37,26 @@ function* handleAuthSignIn(action) {
     if (response.data.accessToken && response.data.refreshToken) {
       saveToken(response.data.accessToken, response.data.refreshToken);
       yield call(handleAuthFetchUser, { payload: response.data.accessToken });
-      toast.success("Sign In Successfully", {
+      toast.success("Sign In Successfully!", {
         pauseOnHover: false,
         autoClose: 1500,
       });
-      // setTimeout( () => {
-      //   window.location.replace("/")
-      // },2000)
+      setTimeout( () => {
+        window.location.replace("/")
+      },2000)
     }
   } catch (err) {
-    console.log(err);
+    toast.error("Please check your account!", {
+      pauseOnHover: false,
+      autoClose: 1500,
+    });
   }
 }
 
 function* handleAuthFetchUser({ payload }) {
   try {
     const response = yield call(requestAuthFetchUser, payload);
+    console.log("Response ~~", response);
     if (response.status === 200) {
       yield put(
         updateUser({

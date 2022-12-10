@@ -10,7 +10,10 @@ export const requestAuthSignIn = (data) => {
 };
 
 export const requestAuthFetchUser = (token) => {
-  if (!token) return;
+  if (!token) {
+    console.log("No token");
+    return;
+  }
   return axios.get("/me", {
     headers: {
       "Content-Type": "application/json",

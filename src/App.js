@@ -1,21 +1,9 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-// import CampaignDetail from "./modules/campaign/parts/CampaignDetail";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken, updateUser } from "./store/auth/auth-slice";
 import { getToken, logOut } from "./utils/auth";
-  
-const customStyles = {
-  content: {
-    // top: '50%',
-    // left: '50%',
-    // right: 'auto',
-    // bottom: 'auto',
-    // marginRight: '-50%',
-    // transform: 'translate(-50%, -50%)',
-  },
-};
 Modal.setAppElement("#root");
 Modal.defaultStyles = {};
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
@@ -54,9 +42,6 @@ function App() {
     }
   }, []);
 
-  if(user) {
-    console.log("User")
-  }
   return (
     <Suspense>
       <Routes>

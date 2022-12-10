@@ -1,7 +1,6 @@
 import React from "react";
 import ComingSoon from "../components/common/ComingSoon";
-import RequiredAuthPage from "./RequiredAuthPage";
-
+import RequiredAuthPage from '../layouts/RequiredAuthPage'
 const ProfilePage = () => {
   return (
     <RequiredAuthPage>

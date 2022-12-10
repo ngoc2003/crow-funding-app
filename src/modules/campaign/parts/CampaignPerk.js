@@ -2,12 +2,12 @@ import React from "react";
 import Button from "../../../components/common/Button";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
-const CampaignPerk = ({ button = false }) => {
+const CampaignPerk = ({ img = defaultImage, button = false }) => {
   return (
     <div>
       <div className="bg-white rounded-md shadow-md dark:bg-darkSecondary">
         <img
-          src={defaultImage}
+          src={img}
           className="h-[232px] object-cover rounded-md w-full"
           alt=""
         />

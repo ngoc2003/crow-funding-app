@@ -12,7 +12,8 @@ const Button = ({
   third = false,
   fluid = false,
   isLoading = false,
-  onClick=() => {},
+  transparent = false,
+  onClick = () => {},
   ...rest
 }) => {
   const child = !!isLoading ? (
@@ -31,6 +32,8 @@ const Button = ({
           ? "bg-secondary text-white"
           : third
           ? "bg-white text-secondary"
+          : transparent
+          ? "bg-transparent text-primary"
           : "bg-[#EEEAFD] text-secondary"
       } ${isLoading && "pointer-events-none opacity-50"} ${
         fluid && "w-full"

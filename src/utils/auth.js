@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const accessTokenKey = "crow_funding_access_token";
 const refreshTokenKey = "crow_funding_refesh_token";
@@ -47,7 +48,7 @@ export const logOut = () => {
       path: "/",
       domain: process.env.COOKIE_DOMAIN,
     });
+    window.location.reload()
   }
-  // window.location.reload()
 
 };

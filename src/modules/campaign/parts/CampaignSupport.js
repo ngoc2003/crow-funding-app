@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/input/Input";
-const CampaignSupport = () => {
+const CampaignSupport = ({onClick =() => {}}) => {
   return (
     <>
       <h4 className="mb-5 font-semibold text-black dark:text-white">Support</h4>
@@ -18,7 +18,7 @@ const CampaignSupport = () => {
             Support the project for no reward, just because it speaks to you.
           </p>
         </div>
-        <Button fluid secondary>
+        <Button onClick={onClick} fluid secondary>
           Continue
         </Button>
       </div>

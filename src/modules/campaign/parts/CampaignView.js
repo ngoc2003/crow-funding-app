@@ -16,7 +16,7 @@ import { Interweave } from "interweave";
 import CampaignVideo from "./CampaignVideo";
 const defaultImage = `https://wallpaperaccess.com/full/508751.jpg`;
 
-const CampaignView = () => {
+const CampaignView = ({setShowModal = () => {}}) => {
   const { slug } = useParams();
   const [data, setData] = useState({});
   const [imgURL, setImgURL] = useState("");
@@ -98,7 +98,7 @@ const CampaignView = () => {
               text="Days left"
             ></CampaignMeta>
           </div>
-          <Button fluid primary>
+          <Button fluid primary onClick={() => setShowModal(true)}>
             Back this project
           </Button>
         </div>
@@ -111,7 +111,7 @@ const CampaignView = () => {
           <span>Updates</span>
           <span>Comments</span>
         </div>
-        <Button primary>Back this project</Button>
+        <Button primary onClick={() => setShowModal(true)}>Back this project</Button>
       </div>
       <div className="grid gap-x-10 grid-cols-[1.3fr,1fr]">
         <div className="">
@@ -126,13 +126,16 @@ const CampaignView = () => {
           </div>
         </div>
         <div>
-          <CampaignSupport></CampaignSupport>
+          <CampaignSupport onClick={setShowModal}></CampaignSupport>
           <div className="mb-14"></div>
 
           <div className="flex flex-col gap-y-8">
-            <CampaignPerk></CampaignPerk>
-            <CampaignPerk></CampaignPerk>
-            <CampaignPerk></CampaignPerk>
+          {
+            imgURL.length && imgURL.map(item => (
+              
+            <CampaignPerk img={item} key={v4()}></CampaignPerk>
+            ))
+          }
           </div>
         </div>
       </div>

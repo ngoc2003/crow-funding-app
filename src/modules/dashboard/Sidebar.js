@@ -12,13 +12,19 @@ import IconProfile from "../../components/icons/IconProfile";
 import IconWithdraw from "../../components/icons/IconWithdraw";
 import useDarkMode from "../../hooks/useDarkMode";
 import logo from "../../images/Logo.png";
-import { logOut } from "../../utils/auth";
+import ReactModal from "react-modal";
+import Button from "../../components/common/Button";
+import IconClose from "../../components/icons/IconClose";
 
+import { logOut } from "../../utils/auth";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useDarkMode();
-  const [scroll, setScroll] = useState(0)
+  const [openModal, setOpenModal] = useState(false);
+  function handleLogOut() {
+    dispatch(logOut());
+  }
   const sidebarLinks = [
     {
       icon: <IconDashBoard />,
@@ -49,19 +55,46 @@ const Sidebar = () => {
       icon: <IconLogout />,
       name: "Logout",
       onClick: () => {
-        dispatch(logOut());
+        setOpenModal(true);
       },
     },
     {
-      icon: darkMode ? <IconDarkMode /> : <IconLightMode/>,
+      icon: darkMode ? <IconDarkMode /> : <IconLightMode />,
       name: "Light/ Dark",
-      onClick:() => {
-        setDarkMode(!darkMode)
-      }
+      onClick: () => {
+        setDarkMode(!darkMode);
+      },
     },
   ];
   return (
     <div className="flex flex-col items-center ">
+      <ReactModal
+        isOpen={openModal}
+        overlayClassName={
+          "modal-overlay fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center "
+        }
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={() => setOpenModal(false)}
+        className="modal-content w-full max-w-[521px] dark:bg-darkbg bg-white rounded-2xl outline-none p-10 relative max-h-[90vh] overflow-y-scroll scroll-hidden"
+      >
+        <button
+          onClick={() => setOpenModal(false)}
+          className="float-right w-6 h-6 duration-300 dark:hover:text-white text-text1"
+        >
+          <IconClose></IconClose>
+        </button>
+        <h2 className="clear-both mb-10 text-2xl font-bold text-center dark:text-white ">
+          Are you sure to log out?
+        </h2>
+        <div className="flex gap-x-3">
+          <Button primary fluid onClick={() => handleLogOut()}>
+            Log out
+          </Button>
+          <Button transparent fluid onClick={() => setOpenModal(false)}>
+            Cancel
+          </Button>
+        </div>
+      </ReactModal>
       <img src={logo} alt="logo" className="" />
       <Gap></Gap>
       <div className="px-[14px] items-center w-full bg-white dark:bg-darkSecondary shadow-[10px_10px_20px_rgba(218, 213, 213, 0.15)] rounded-xl md:w-20 py-10 flex gap-y-7 flex-col ">

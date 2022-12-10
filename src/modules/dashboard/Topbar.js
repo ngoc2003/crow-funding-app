@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import avatar from "../../images/avatarPreview.png";
 import Search from "./Search";
@@ -10,6 +10,14 @@ import { Menu } from "antd";
 const Topbar = () => {
   const { user } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
+  const userAvatarRef = useRef(null);
+
+  document.addEventListener("click", (e) => {
+    if (!userAvatarRef.current.contains(e.target)) {
+      setShowMenu(false);
+    }
+  });
+  
   const handleMenuClick = (e) => {
     setShowMenu(!showMenu);
   };
@@ -30,7 +38,11 @@ const Topbar = () => {
           Hello <span className="ml-1 text-primary">{user.name}</span>
         </div>
         <div className="border-b dark:border-b-darkbg"></div>
-        <Menu items={menu} className='dark:bg-transparent dark:text-white' onClick={() => setShowMenu(false)}></Menu>
+        <Menu
+          items={menu}
+          className="dark:bg-transparent dark:text-white"
+          onClick={() => setShowMenu(false)}
+        ></Menu>
       </>
     );
   };
@@ -52,7 +64,7 @@ const Topbar = () => {
   return (
     <div className="flex items-center justify-between mb-8 ">
       <div className="flex items-center flex-1 gap-x-10">
-        <Search ></Search>
+        <Search></Search>
       </div>
       <div className="flex items-center justify-end flex-1 gap-x-10">
         <Fund></Fund>
@@ -63,6 +75,7 @@ const Topbar = () => {
           <div
             className="overflow-hidden rounded-full cursor-pointer w-13 h-13"
             onClick={handleMenuClick}
+            ref={userAvatarRef}
           >
             <img src={avatar} alt="" className="object-cover w-full" />
           </div>

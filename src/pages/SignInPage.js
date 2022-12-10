@@ -8,14 +8,13 @@ import Input from "../components/input/Input";
 import Label from "../components/label/Label";
 import LayoutAuthen from "../layouts/LayoutAuthen";
 import * as Yup from "yup";
-import IconEyeToggle from "../components/icons";
-import useToggleValue from "../hooks/useToggleValue";
 import Button from "../components/common/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/auth/auth-slice";
 
 export default function SignInPage() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
   const handleSignIn = (values) => {
     dispatch(signIn(values));
   };
@@ -44,6 +43,7 @@ export default function SignInPage() {
           .min(8, "Password must at least 8 char"),
       })}
       onSubmit={(values) => {
+        setLoading(true)
         handleSignIn(values);
       }}
     >
@@ -77,7 +77,7 @@ export default function SignInPage() {
                 </FormGroup>
               );
             })}
-            <Button fluid primary type="submit" >
+            <Button isLoading={loading} fluid primary type="submit" >
               Sign In
             </Button>
           </Form>
